@@ -1,0 +1,32 @@
+# Commonhold workspace settings. Changing this file needs 2 member approvals plus a steward code-owner review.
+project: Commonhold
+descriptor: Open network for player-run worlds
+tagline: "Your world, connected; your character, unkillable."   # TODO(group): pick the tagline together
+repo: commonhold/commonhold                                      # TODO(owner): the real org/repo once created
+started: 2026-11-10
+
+rules:
+  joint_approvals: 2      # other members who must approve a change to joint/, wiki/, README.md or a new member folder
+  spec_approvals: 3       # other members who must approve a change to spec/ (one of them the section steward)
+  core_approvals: 2       # other members who must approve a change to how the workspace itself works
+  spec_paths: ["spec/"]
+  core_paths: [".github/", "tools/", "commonhold.yml", "CHARTER.md", "GOVERNANCE.md", "CONTRIBUTING.md", "SECURITY.md", "LICENSE", "site/index.html"]
+  generated_paths: ["CREDITS.md", "CODEOWNERS", "site/status.json"]   # written only by the render job
+  # everything else that isn't members/<you>/ counts as joint
+
+guard:
+  blocked_extensions: [".mpq", ".dbc", ".db2", ".m2", ".mdx", ".wmo", ".adt", ".wdt", ".wdl", ".blp", ".skin", ".anim",
+                       ".bone", ".skel", ".phys", ".tex", ".casc", ".idx", ".exe", ".dll", ".so", ".dylib", ".msi",
+                       ".wasm", ".pdb", ".lib", ".a", ".bin", ".dat"]
+  allowed_binary_extensions: [".png", ".jpg", ".jpeg", ".webp", ".gif", ".svg", ".pdf", ".ico"]
+  max_binary_bytes: 2000000
+
+# Spec sections and their stewards (member handles). A spec change needs its steward among the approvers.
+spec_sections:
+  identity: is4
+  passport: wrekczar
+  customs: wrekczar
+  resilience: maweu
+  policy: maweu
+  directory: orion
+  relays: orion

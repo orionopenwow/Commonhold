@@ -1,0 +1,21 @@
+# Mirrors the repository to Codeberg after every merge, once CODEBERG_TOKEN (secret) and CODEBERG_REPO (variable,
+# e.g. commonhold/commonhold) are set. Without them it does nothing.
+name: mirror
+on:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - env:
+          TOKEN: ${{ secrets.CODEBERG_TOKEN }}
+          TARGET: ${{ vars.CODEBERG_REPO }}
+        run: |
+          if [ -z "$TOKEN" ] || [ -z "$TARGET" ]; then echo "Codeberg mirror not set up yet."; exit 0; fi
+          git push --force "https://mirror:${TOKEN}@codeberg.org/${TARGET}.git" "HEAD:refs/heads/main" --tags

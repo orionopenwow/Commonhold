@@ -1,0 +1,35 @@
+# A neutral Commonhold Discord. Chat happens here; anything decided is copied into joint/decisions/ so the record
+# lives in the repository. Can be applied with Leyline's Discord setup tool once it accepts a layout file
+# (small change), or by hand in about ten minutes.
+name: Commonhold
+roles:
+  - {name: Member, colour: "#3D8B7D", note: "has a members/ folder"}
+  - {name: Steward, colour: "#C4892F", note: "approves a spec section"}
+  - {name: Host, colour: "#5B7DB1", note: "runs a world on the network"}
+  - {name: Council, colour: "#8E5B9F", note: "signs blocks (2 of 3)"}
+categories:
+  - name: Start here
+    channels:
+      - {name: welcome, read_only: true, topic: "What Commonhold is, the charter, and how to join"}
+      - {name: announcements, read_only: true, topic: "Milestones only. Every post links to the repo."}
+      - {name: introductions, topic: "Who you are, what you run or build"}
+  - name: Building
+    channels:
+      - {name: spec, topic: "Spec discussion; proposals go to joint/decisions/"}
+      - {name: identity, topic: "Keys, passports, mod-p2p alignment (steward: IS4)"}
+      - {name: passport-and-customs, topic: "Passport format, visits, customs, vault (steward: Leon)"}
+      - {name: resilience, topic: "Backups, witness logs, re-homing (steward: Maweu)"}
+      - {name: directory-and-relays, topic: "Realm cards, tiers, relays, launchers (steward: Orion)"}
+      - {name: ships, read_only: true, topic: "Feed of merged pull requests (webhook)"}
+  - name: Hosts
+    channels:
+      - {name: hosting-help, topic: "Running a world on the network"}
+      - {name: realm-cards, topic: "Show your world's card and charter"}
+  - name: Players
+    channels:
+      - {name: general}
+      - {name: looking-for-visitors, topic: "Session worlds and visits tonight"}
+      - {name: feedback}
+  - name: Safety
+    channels:
+      - {name: reports, private_to: [Council], topic: "Reports about worlds or relays; also via GitHub"}

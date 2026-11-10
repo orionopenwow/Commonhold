@@ -1,0 +1,10 @@
+version: "0.1-draft"
+sections:
+  - {id: identity,   title: "Identity and keys",            steward: is4,      status: draft}
+  - {id: records,    title: "Signed records",               steward: orion,    status: draft}
+  - {id: directory,  title: "Realm cards and tiers",        steward: orion,    status: empty}
+  - {id: relays,     title: "Relays and transport",         steward: orion,    status: empty}
+  - {id: passport,   title: "Character Passport",           steward: wrekczar, status: empty}
+  - {id: customs,    title: "Visits, charters and customs", steward: wrekczar, status: empty}
+  - {id: resilience, title: "Witness logs and re-homing",   steward: maweu,    status: empty}
+  - {id: policy,     title: "Hosting, safety and privacy",  steward: maweu,    status: empty}

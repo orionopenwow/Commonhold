@@ -1,0 +1,8 @@
+handle: maweu
+name: Maweu
+github: ""                                # TODO(Maweu): your GitHub login
+role: Shutdown resilience and backups, local tamper-proof passports, anti-selling, safety policy, fair listing
+project: {name: "", url: ""}
+stewards: [resilience, policy]
+license: Apache-2.0                       # TODO(Maweu): change if you prefer another
+joined: 2026-11-10

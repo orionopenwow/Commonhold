@@ -1,0 +1,63 @@
+# Rebuilds the living README, CREDITS.md, CODEOWNERS and the console data after every merge and once a day,
+# syncs wiki/ to the GitHub wiki, and publishes the console to GitHub Pages.
+name: render
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: "17 6 * * *"
+  workflow_dispatch:
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+concurrency:
+  group: render
+  cancel-in-progress: false
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ssh-key: ${{ secrets.RENDER_DEPLOY_KEY }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install pyyaml==6.0.2
+      - run: python tools/ch.py render
+      - name: Commit the living sections (needs the RENDER_DEPLOY_KEY bypass key; see SETUP.md)
+        env:
+          HAS_KEY: ${{ secrets.RENDER_DEPLOY_KEY != '' }}
+        run: |
+          if [ -z "$(git status --porcelain)" ]; then echo "Nothing changed."; exit 0; fi
+          if [ "$HAS_KEY" != "true" ]; then echo "::warning::No RENDER_DEPLOY_KEY yet, so the README wasn't updated on main (the console still is)."; exit 0; fi
+          git config user.name "commonhold-render"
+          git config user.email "render@users.noreply.github.com"
+          git add README.md CREDITS.md CODEOWNERS site/status.json joint/chronicle.md
+          git commit -m "render: living README, credits and console data [skip ci]"
+          git push origin HEAD:main
+      - name: Sync wiki/ to the GitHub wiki
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git clone "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.wiki.git" /tmp/wiki
+          cp wiki/*.md /tmp/wiki/
+          sed -i -E "s#\]\(\.\./([^)]+)\)#](https://github.com/${GITHUB_REPOSITORY}/blob/main/\1)#g; s#\]\(([A-Za-z0-9-]+)\.md\)#](\1)#g" /tmp/wiki/*.md
+          cd /tmp/wiki && git add -A && git -c user.name=commonhold-render -c user.email=render@users.noreply.github.com commit -m "Sync from wiki/" && git push || echo "wiki already up to date"
+      - name: Build the console
+        run: |
+          mkdir -p site/wiki site/spec
+          cp wiki/*.md site/wiki/
+          cp spec/*.md site/spec/
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+      - id: deploy
+        uses: actions/deploy-pages@v4

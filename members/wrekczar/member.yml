@@ -1,0 +1,8 @@
+handle: wrekczar
+name: Leon (Wrekczar)
+github: ""                                # TODO(Leon): your GitHub login
+role: Character Passport, Customs Vault, three-way reconciliation, visit rules
+project: {name: Worlds of CoreCraft, url: ""}
+stewards: [passport, customs]
+license: "Leon's choice"                  # TODO(Leon): your folder's licence. CoACore-derived material stays here only.
+joined: 2026-11-10

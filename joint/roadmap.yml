@@ -1,0 +1,11 @@
+# The shared roadmap. When a milestone is done, set status: done, done_on and by: the chronicle and README update themselves.
+phases:
+  - {id: found, when: "Week 0", title: "Org created, workspace pushed, members invited, Discord opened", status: doing, by: [orion]}
+  - {id: spec-01, when: "Weeks 1-3", title: "Spec v0.1: identity, realm card, charter, passport, visit record, witness entry, test vectors", status: todo}
+  - {id: lib, when: "Weeks 2-5", title: "Reference library (Python + Rust) and commonhold-check", status: todo}
+  - {id: adapter-ac, when: "Weeks 3-7", title: "Stock AzerothCore passport adapter", status: todo}
+  - {id: pilot, when: "Weeks 6-8", title: "Pilot: one character visits another world and comes home; chaos tests", status: todo}
+  - {id: leyline, when: "Weeks 6-10", title: "Leyline door: tiers, tags, passport store, backups, Visit and Re-home", status: todo}
+  - {id: live, when: "Weeks 8-12", title: "Live-play bridge with mod-p2p on stock AzerothCore", status: todo}
+  - {id: resilience, when: "Weeks 8-12", title: "Waystations, witness logs, Close this world, re-homing", status: todo}
+  - {id: league, when: "Weeks 10-12", title: "First league with 3-5 hosts; spec v1.0 public", status: todo}

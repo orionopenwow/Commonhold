@@ -1,0 +1,10 @@
+handle: orion
+name: Orion
+github: orionopenwow
+role: Directory and realm cards, relays, one-click hosting and joining, the community workspace
+project: {name: Leyline, url: "https://leylinelauncher.com"}
+stewards: [directory, relays]
+license: Apache-2.0
+links: {discord: "", reddit: ""}        # TODO(owner): Discord and Reddit links only
+joined: 2026-11-10
+git_names: [Orion]
