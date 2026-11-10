@@ -8,3 +8,6 @@ license: Apache-2.0
 links: {discord: "", reddit: ""}        # TODO(owner): Discord and Reddit links only
 joined: 2026-11-10
 git_names: [Orion]
+contributed:
+  - "Started Commonhold and this workspace; the Leyline launcher, host kit, relays and signed realm listings it builds on"
+  - "The \"unified network, nobody owns it\" direction, the seeded big world, free and signed hosting for the record"

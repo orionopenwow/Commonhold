@@ -1,0 +1,28 @@
+# People and projects whose ideas, reports and work shaped Commonhold, who don't have a folder here (yet).
+# The render job lists them in CREDITS.md and the README. Add yourself or someone else by pull request.
+# github: their GitHub login if known ("" if not); found_via: where it happened.
+people:
+  - name: Akuma
+    github: ""
+    found_via: Discord
+    for: "First host to hit and report the host kit's 'invalid reference format' error, which got it fixed for everyone"
+  - name: Squishy
+    github: ""
+    found_via: Discord
+    for: "Reported that single player couldn't be picked in the server list, which led to both local worlds becoming proper rows"
+  - name: "z… [BFLD]"
+    github: ""
+    found_via: Discord
+    for: "Asked whether this could be a fork of an existing core, which shaped the 'stock cores, open protocol' answer"
+
+projects:
+  - {name: AzerothCore, url: "https://github.com/azerothcore/azerothcore-wotlk", for: "The open-source server core most worlds here run; the first passport adapter targets it"}
+  - {name: TrinityCore, url: "https://github.com/TrinityCore/TrinityCore", for: "Open-source server core; adapter planned"}
+  - {name: CMaNGOS, url: "https://github.com/cmangos", for: "Open-source server cores for the earlier eras; adapter planned"}
+  - {name: Project Eternal mod-p2p, url: "https://github.com/Project-Eternal/mod-p2p", for: "Live play between player-run servers; the shared identity format (by IS4)"}
+  - {name: "Sigstore Rekor and Sigsum", url: "https://docs.sigstore.dev/logging/overview/", for: "Append-only transparency logs: the model for waystation witness logs"}
+  - {name: Nostr, url: "https://nostrcg.github.io/devguide/protocol/overview", for: "Signed events on simple relays: the closest model to the network's records"}
+  - {name: "atproto (Bluesky)", url: "https://atproto.com/blog/rpg-actor", for: "Player-held character records checked by issuers: the same idea as passports and witnesses"}
+  - {name: iroh, url: "https://pinggy.io/blog/iroh_1_0_dial_keys_not_ips/", for: "Dial keys, not IPs: a candidate for direct links between nodes"}
+  - {name: OpenSimulator Hypergrid, url: "https://hypergridbusiness.com/?p=51141", for: "Years of avatars travelling between independent grids, and the lessons about items, patches and rogue hosts"}
+  - {name: All Contributors, url: "https://allcontributors.org/docs/en/specification", for: "Credit for every kind of contribution, not just code"}

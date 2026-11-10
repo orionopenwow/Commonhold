@@ -54,7 +54,12 @@ Commonhold is the way between: **everyone keeps their own world, and the worlds 
 3. **Shared work is reviewed.** `joint/` and `wiki/` need 2 other members to approve; `spec/` needs 3, including
    that section's steward. The guard tells you whose approval a change needs.
 
+**Staying in sync:** press `Get latest.bat` when you sit down, work in your folder, then `Ship my folder.bat`. Shipping
+starts from everyone's newest work and brings you back up to date when it merges. Working with an AI assistant? See
+[Working together](wiki/Working-together.md) for a prompt to paste.
+
 Ground rules: no game files, no secrets, no money, clean provenance, sign off your commits (`git commit -s`).
+How we build things: [PHILOSOPHY.md](PHILOSOPHY.md).
 More in [CHARTER.md](CHARTER.md), [GOVERNANCE.md](GOVERNANCE.md) and [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Who's building it
@@ -64,9 +69,21 @@ More in [CHARTER.md](CHARTER.md), [GOVERNANCE.md](GOVERNANCE.md) and [CONTRIBUTI
 |---|---|---|---|---|
 | **IS4**  | Shared identity, live play across player-run servers (mod-p2p), spec quality | [Project Eternal mod-p2p](https://github.com/Project-Eternal/mod-p2p) | MPL-2.0 | 0 |
 | **Maweu**  | Shutdown resilience and backups, local tamper-proof passports, anti-selling, safety policy, fair listing |  | Apache-2.0 | 0 |
-| **Orion** [@orionopenwow](https://github.com/orionopenwow) | Directory and realm cards, relays, one-click hosting and joining, the community workspace | [Leyline](https://leylinelauncher.com) | Apache-2.0 | 4 |
+| **Orion** [@orionopenwow](https://github.com/orionopenwow) | Directory and realm cards, relays, one-click hosting and joining, the community workspace | [Leyline](https://leylinelauncher.com) | Apache-2.0 | 5 |
 | **Leon (Wrekczar)**  | Character Passport, Customs Vault, three-way reconciliation, visit rules | Worlds of CoreCraft | Leon's choice | 0 |
 <!-- ch:members:end -->
+
+### Thanks
+
+<!-- ch:thanks:start -->
+- **Akuma**: First host to hit and report the host kit's 'invalid reference format' error, which got it fixed for everyone
+- **Squishy**: Reported that single player couldn't be picked in the server list, which led to both local worlds becoming proper rows
+- **z… [BFLD]**: Asked whether this could be a fork of an existing core, which shaped the 'stock cores, open protocol' answer
+
+Built on and learned from: [AzerothCore](https://github.com/azerothcore/azerothcore-wotlk), [TrinityCore](https://github.com/TrinityCore/TrinityCore), [CMaNGOS](https://github.com/cmangos), [Project Eternal mod-p2p](https://github.com/Project-Eternal/mod-p2p), [Sigstore Rekor and Sigsum](https://docs.sigstore.dev/logging/overview/), [Nostr](https://nostrcg.github.io/devguide/protocol/overview), [atproto (Bluesky)](https://atproto.com/blog/rpg-actor), [iroh](https://pinggy.io/blog/iroh_1_0_dial_keys_not_ips/), [OpenSimulator Hypergrid](https://hypergridbusiness.com/?p=51141), [All Contributors](https://allcontributors.org/docs/en/specification).
+
+Everyone's full contribution is in [CREDITS.md](CREDITS.md).
+<!-- ch:thanks:end -->
 
 ## The spec
 
@@ -112,6 +129,7 @@ Spec **v0.1-draft**: 0 of 8 sections accepted.
 ## Recently shipped
 
 <!-- ch:recent:start -->
+- 2026-11-10 · **orion** · README: logo, the gist, what the protocol does, join the build; dev request template; logo in the co
 - 2026-11-10 · **orion** · Point the workspace at orionopenwow/Commonhold
 - 2026-11-10 · **orion** · Discord: slim developer layout, one-run setup bot with pinned purpose posts
 - 2026-11-10 · **orion** · Console, rendered living sections, setup guide

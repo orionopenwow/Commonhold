@@ -5,6 +5,7 @@
     python tools/ch.py render                   (CI) rebuild README sections, CREDITS.md, CODEOWNERS, site/status.json
     python tools/ch.py ship -m "what changed"   (you) send your folder's changes; they merge themselves if clean
     python tools/ch.py check                    (you) the same file checks as the guard, on your working tree
+    python tools/ch.py sync                     (you) get everyone's newest work, keeping what you haven't shipped
 
 Needs Python 3.9+, PyYAML, git, and the GitHub CLI (gh) for guard and ship. Never runs code from a pull request:
 the guard reads only the list of changed files, their text diffs and reviews through the GitHub API.
@@ -18,6 +19,7 @@ import os
 import re
 import subprocess
 import sys
+import time
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -375,6 +377,7 @@ def build_status(root: Path = ROOT, today: dt.date | None = None) -> dict:
         "roadmap": roadmap.get("phases", []),
         "decisions": decisions, "recent": recent, "wiki": wiki,
         "doors": load_yaml(root / "joint" / "doors.yml", {}).get("doors", []) if (root / "joint" / "doors.yml").exists() else [],
+        "thanks": load_yaml(root / "joint" / "thanks.yml", {}) or {},
     }
 
 
@@ -424,7 +427,17 @@ def render_sections(st: dict) -> dict[str, str]:
     pulse = (f"Day **{st['age_days']}** · **{len(members)}** members · spec {st['spec']['done']}/"
              f"{len(st['spec']['sections'])} sections accepted · {done}/{len(st['roadmap'])} milestones done · "
              f"updated {st['generated']}")
-    return {"pulse": pulse, "members": "\n".join(rows), "spec": "\n".join(spec), "roadmap": "\n".join(road),
+    th = st.get("thanks") or {}
+    thanks = []
+    for p in th.get("people", []):
+        gh = f" [@{p['github']}](https://github.com/{p['github']})" if p.get("github") else ""
+        thanks.append(f"- **{p['name']}**{gh}: {p.get('for', '')}")
+    if th.get("projects"):
+        thanks.append("")
+        thanks.append("Built on and learned from: " + ", ".join(f"[{x['name']}]({x['url']})" for x in th["projects"]) + ".")
+    thanks.append("")
+    thanks.append("Everyone's full contribution is in [CREDITS.md](CREDITS.md).")
+    return {"pulse": pulse, "thanks": "\n".join(thanks), "members": "\n".join(rows), "spec": "\n".join(spec), "roadmap": "\n".join(road),
             "decisions": "\n".join(dec), "recent": "\n".join(rec)}
 
 
@@ -435,8 +448,8 @@ def render_credits(st: dict) -> str:
         proj = m.get("project") or {}
         out += [f"## {m.get('name', m['handle'])}" + (f" ([@{m['github']}](https://github.com/{m['github']}))" if m.get("github") else ""),
                 "", f"- **Brings:** {m.get('role', '')}"]
-        if proj:
-            out.append(f"- **Project:** [{proj.get('name')}]({proj.get('url', '')})")
+        if proj.get("name"):
+            out.append(f"- **Project:** [{proj['name']}]({proj['url']})" if proj.get("url") else f"- **Project:** {proj['name']}")
         if m.get("stewards"):
             out.append(f"- **Steward of:** {', '.join(m['stewards'])}")
         areas = sorted(m["credit"]["areas"].items(), key=lambda kv: -kv[1])[:6]
@@ -445,6 +458,21 @@ def render_credits(st: dict) -> str:
         out.append(f"- **Commits:** {m['credit']['commits']}")
         if m.get("thanks"):
             out.append(f"- **Thanks:** {m['thanks']}")
+        if m.get("contributed"):
+            out.append("- **Contributed:**")
+            out += [f"  - {c}" for c in m["contributed"]]
+        out.append("")
+    th = st.get("thanks") or {}
+    if th.get("people"):
+        out += ["## Thanks", "", "People whose ideas and reports shaped Commonhold. Want a folder of your own? Open a dev request.", ""]
+        for p in th["people"]:
+            gh = f" ([@{p['github']}](https://github.com/{p['github']}))" if p.get("github") else ""
+            via = f" ({p['found_via']})" if p.get("found_via") else ""
+            out.append(f"- **{p['name']}**{gh}{via}: {p.get('for', '')}")
+        out.append("")
+    if th.get("projects"):
+        out += ["## Built on and learned from", ""]
+        out += [f"- [{x['name']}]({x['url']}): {x.get('for', '')}" for x in th["projects"]]
         out.append("")
     return "\n".join(out)
 
@@ -548,15 +576,63 @@ def cmd_ship(a) -> int:
         return 1
     run("git", "fetch", "origin", "main")
     branch = f"ship/{me}-{dt.datetime.now().strftime('%Y%m%d-%H%M%S')}"
-    run("git", "switch", "-c", branch)
+    # the ship branch starts from the newest main, so what you send never undoes anyone else's work; your folder's
+    # changes come along (only you change your folder, so they never clash with main)
+    r = subprocess.run(["git", "switch", "-c", branch, "origin/main"], capture_output=True, text=True, cwd=ROOT)
+    if r.returncode != 0:
+        print("Couldn't start from the newest version: run Get latest (python tools/ch.py sync) first, then ship again.")
+        return 1
     run("git", "add", "--", f"members/{me}/")
     msg = a.message or f"{me}: update my folder"
     run("git", "commit", "-s", "-m", msg)
     run("git", "push", "-u", "origin", branch)
     url = run("gh", "pr", "create", "--base", "main", "--head", branch, "--title", msg,
               "--body", f"Shipped from members/{me}/ with tools/ch.py ship.")
-    run("git", "switch", "main", check=False)
-    print(f"SHIPPED: {url}\nThe guard checks it and merges it by itself, usually within a minute.")
+    print(f"Sent: {url}\nThe guard checks it and merges it by itself. Waiting for that (up to 3 minutes)…")
+    for _ in range(36):
+        time.sleep(5)
+        state = run("gh", "pr", "view", url, "--json", "state", "--jq", ".state", check=False)
+        if state == "MERGED":
+            sync_main()
+            print(f"SHIPPED: merged into main, and this folder is up to date with everyone's work.")
+            return 0
+        if state == "CLOSED":
+            print("The pull request was closed without merging. Open it to see why.")
+            return 1
+    print("Still being checked. Your work is safe on its own branch; run Get latest in a few minutes to come back to main.")
+    return 0
+
+
+def sync_main() -> None:
+    """Come back to main with everyone's newest work, keeping anything you haven't shipped yet."""
+    run("git", "fetch", "origin", "main")
+    here = run("git", "branch", "--show-current", check=False)
+    dirty = bool(run("git", "status", "--porcelain", check=False))
+    if dirty:
+        run("git", "stash", "push", "-u", "-m", "commonhold-sync")
+    if here != "main":
+        run("git", "switch", "main")
+    r = subprocess.run(["git", "merge", "--ff-only", "origin/main"], capture_output=True, text=True, cwd=ROOT)
+    if r.returncode != 0:
+        # local commits on main that never went anywhere: keep them on a side branch, then take main as it is
+        side = f"kept/{dt.datetime.now().strftime('%Y%m%d-%H%M%S')}"
+        run("git", "branch", side)
+        run("git", "reset", "--hard", "origin/main")
+        print(f"Your own unsent commits on main were kept on the branch {side}.")
+    if here.startswith("ship/"):
+        run("git", "branch", "-D", here, check=False)
+    for old in run("git", "branch", "--list", "ship/*", "--merged", "main", check=False).split():
+        if old != "*":
+            run("git", "branch", "-D", old, check=False)
+    if dirty:
+        r = subprocess.run(["git", "stash", "pop"], capture_output=True, text=True, cwd=ROOT)
+        if r.returncode != 0:
+            print("Your unshipped changes are kept in the stash (git stash list): they overlap something new on main.")
+
+
+def cmd_sync(a) -> int:
+    sync_main()
+    print("UP TO DATE: you have everyone's newest work. Your unshipped changes are still here.")
     return 0
 
 
@@ -567,8 +643,9 @@ def main(argv=None) -> int:
     r = sub.add_parser("render"); r.add_argument("--root")
     s = sub.add_parser("ship"); s.add_argument("-m", "--message")
     c = sub.add_parser("check"); c.add_argument("--base", default="HEAD")
+    sub.add_parser("sync")
     a = ap.parse_args(argv)
-    return {"guard": cmd_guard, "render": cmd_render, "ship": cmd_ship, "check": cmd_check}[a.cmd](a)
+    return {"guard": cmd_guard, "render": cmd_render, "ship": cmd_ship, "check": cmd_check, "sync": cmd_sync}[a.cmd](a)
 
 
 if __name__ == "__main__":

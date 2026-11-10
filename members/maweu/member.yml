@@ -6,3 +6,8 @@ project: {name: "", url: ""}
 stewards: [resilience, policy]
 license: Apache-2.0                       # TODO(Maweu): change if you prefer another
 joined: 2026-11-10
+contributed:
+  - "Shutdown resilience: characters that survive a server closing, migration and backups"
+  - "Local, tamper-proof passports and selling characters made hard without invasive checks"
+  - "The hosting safety policy, and fair listing (\"Official looks like an ad\")"
+  - "Session worlds on a laptop with opt-in write-back; resilience as the reason people join"

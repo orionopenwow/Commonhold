@@ -4,7 +4,7 @@
 forever, even if a server shuts down.
 
 - **New here?** Read [How it works](How-it-works.md), then the [FAQ](FAQ.md).
-- **Want to help?** See [How to join](How-to-join.md).
+- **Want to help?** See [How to join](How-to-join.md) and [Working together](Working-together.md).
 - **Words we use:** [Glossary](Glossary.md).
 - **The detailed design:** [Design](Design.md) and the [spec](../spec/README.md).
 

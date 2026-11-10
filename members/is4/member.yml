@@ -1,8 +1,12 @@
 handle: is4
 name: IS4
-github: ""                                # TODO(IS4): your GitHub login
+github: ""                                # TODO(IS4): confirm your GitHub login (IllidanS4?)
 role: Shared identity, live play across player-run servers (mod-p2p), spec quality
 project: {name: Project Eternal mod-p2p, url: "https://github.com/Project-Eternal/mod-p2p"}
 stewards: [identity]
 license: MPL-2.0
 joined: 2026-11-10
+contributed:
+  - "mod-p2p (Project Eternal): live play across player-run servers, with a byte-exact public spec"
+  - "The identity Commonhold adopts: Ed25519 account keys, derived character IDs, signed certificates"
+  - "Escrowed transfers between servers, the pattern behind the Customs Vault's design"

@@ -114,3 +114,26 @@ def test_render_end_to_end(tmp_path):
     assert orion["credit"]["commits"] == 1
     assert "@orionopenwow" in (work / "CODEOWNERS").read_text()
     assert "# Credits" in (work / "CREDITS.md").read_text()
+
+
+def test_sync_keeps_unshipped_work_and_takes_everyone_elses(tmp_path):
+    g = lambda cwd, *a: subprocess.run(["git", "-C", str(cwd), *a], check=True, capture_output=True, text=True).stdout
+    ident = ["-c", "user.name=T", "-c", "user.email=t@example.com"]
+    seed = tmp_path / "seed"
+    shutil.copytree(ROOT, seed, ignore=shutil.ignore_patterns(".git", "__pycache__", ".pytest_cache"))
+    g(seed, "init", "-q", "-b", "main"); g(seed, "add", "-A"); g(seed, *ident, "commit", "-q", "-m", "start")
+    origin = tmp_path / "origin.git"
+    subprocess.run(["git", "clone", "-q", "--bare", str(seed), str(origin)], check=True)
+    a, b = tmp_path / "a", tmp_path / "b"
+    for d in (a, b):
+        subprocess.run(["git", "clone", "-q", str(origin), str(d)], check=True)
+    # B ships something to main
+    (b / "members" / "is4" / "notes.md").write_text("from b\n")
+    g(b, "add", "-A"); g(b, *ident, "commit", "-q", "-m", "b"); g(b, "push", "-q", "origin", "main")
+    # A has unshipped work in its own folder, then gets latest
+    (a / "members" / "orion" / "draft.md").write_text("mine, not shipped\n")
+    r = subprocess.run([sys.executable, str(a / "tools" / "ch.py"), "sync"], capture_output=True, text=True, cwd=a)
+    assert r.returncode == 0, r.stdout + r.stderr
+    assert (a / "members" / "is4" / "notes.md").read_text() == "from b\n"
+    assert (a / "members" / "orion" / "draft.md").read_text() == "mine, not shipped\n"
+    assert g(a, "branch", "--show-current").strip() == "main"

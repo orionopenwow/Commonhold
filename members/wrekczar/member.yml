@@ -6,3 +6,8 @@ project: {name: Worlds of CoreCraft, url: ""}
 stewards: [passport, customs]
 license: "Leon's choice"                  # TODO(Leon): your folder's licence. CoACore-derived material stays here only.
 joined: 2026-11-10
+contributed:
+  - "Worlds of CoreCraft, the project the visits idea comes from (\"go over to a friend's house\" with your own character)"
+  - "The Character Passport, with the first working round trip between two servers"
+  - "The Customs Vault, three-way reconciliation on return, temporary rows for visitors, federation lockouts"
+  - "The hub-and-spoke design and \"Keeping Things Practical\" (auction house, gold, dupes)"

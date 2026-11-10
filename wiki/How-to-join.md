@@ -8,4 +8,6 @@
 4. **Propose shared changes:** for the roadmap, decisions, wiki or spec, open a pull request. The guard tells you
    whose approval it needs.
 
+Before each session, press `Get latest.bat`. More in [Working together](Working-together.md).
+
 Ground rules: no game files, no secrets, no money, clean provenance, and sign off your commits (`git commit -s`).

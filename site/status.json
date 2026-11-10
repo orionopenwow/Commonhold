@@ -20,6 +20,11 @@
    ],
    "license": "MPL-2.0",
    "joined": "2026-11-10",
+   "contributed": [
+    "mod-p2p (Project Eternal): live play across player-run servers, with a byte-exact public spec",
+    "The identity Commonhold adopts: Ed25519 account keys, derived character IDs, signed certificates",
+    "Escrowed transfers between servers, the pattern behind the Customs Vault's design"
+   ],
    "credit": {
     "commits": 0,
     "areas": {},
@@ -41,6 +46,12 @@
    ],
    "license": "Apache-2.0",
    "joined": "2026-11-10",
+   "contributed": [
+    "Shutdown resilience: characters that survive a server closing, migration and backups",
+    "Local, tamper-proof passports and selling characters made hard without invasive checks",
+    "The hosting safety policy, and fair listing (\"Official looks like an ad\")",
+    "Session worlds on a laptop with opt-in write-back; resilience as the reason people join"
+   ],
    "credit": {
     "commits": 0,
     "areas": {},
@@ -66,13 +77,18 @@
     "reddit": ""
    },
    "joined": "2026-11-10",
+   "contributed": [
+    "Started Commonhold and this workspace; the Leyline launcher, host kit, relays and signed realm listings it builds on",
+    "The \"unified network, nobody owns it\" direction, the seeded big world, free and signed hosting for the record"
+   ],
    "credit": {
-    "commits": 4,
+    "commits": 5,
     "areas": {
-     "root": 18,
-     "site": 4,
+     ".github": 8,
+     "root": 20,
+     "art": 2,
+     "site": 8,
      "community": 7,
-     ".github": 7,
      "tools": 3,
      "joint": 8,
      "members/is4": 2,
@@ -82,7 +98,7 @@
      "spec": 11,
      "wiki": 6
     },
-    "last": "2026-11-10T14:06:26-07:00"
+    "last": "2026-11-10T14:13:59-07:00"
    }
   },
   {
@@ -100,6 +116,12 @@
    ],
    "license": "Leon's choice",
    "joined": "2026-11-10",
+   "contributed": [
+    "Worlds of CoreCraft, the project the visits idea comes from (\"go over to a friend's house\" with your own character)",
+    "The Character Passport, with the first working round trip between two servers",
+    "The Customs Vault, three-way reconciliation on return, temporary rows for visitors, federation lockouts",
+    "The hub-and-spoke design and \"Keeping Things Practical\" (auction house, gold, dupes)"
+   ],
    "credit": {
     "commits": 0,
     "areas": {},
@@ -247,6 +269,11 @@
   {
    "date": "2026-11-10",
    "who": "orion",
+   "subject": "README: logo, the gist, what the protocol does, join the build; dev request template; logo in the co"
+  },
+  {
+   "date": "2026-11-10",
+   "who": "orion",
    "subject": "Point the workspace at orionopenwow/Commonhold"
   },
   {
@@ -271,7 +298,8 @@
   "FAQ.md",
   "Glossary.md",
   "How-it-works.md",
-  "How-to-join.md"
+  "How-to-join.md",
+  "Working-together.md"
  ],
  "doors": [
   {
@@ -292,5 +320,79 @@
    "what": "Live play across player-run servers with shared identity",
    "url": "https://github.com/Project-Eternal/mod-p2p"
   }
- ]
+ ],
+ "thanks": {
+  "people": [
+   {
+    "name": "Akuma",
+    "github": "",
+    "found_via": "Discord",
+    "for": "First host to hit and report the host kit's 'invalid reference format' error, which got it fixed for everyone"
+   },
+   {
+    "name": "Squishy",
+    "github": "",
+    "found_via": "Discord",
+    "for": "Reported that single player couldn't be picked in the server list, which led to both local worlds becoming proper rows"
+   },
+   {
+    "name": "z… [BFLD]",
+    "github": "",
+    "found_via": "Discord",
+    "for": "Asked whether this could be a fork of an existing core, which shaped the 'stock cores, open protocol' answer"
+   }
+  ],
+  "projects": [
+   {
+    "name": "AzerothCore",
+    "url": "https://github.com/azerothcore/azerothcore-wotlk",
+    "for": "The open-source server core most worlds here run; the first passport adapter targets it"
+   },
+   {
+    "name": "TrinityCore",
+    "url": "https://github.com/TrinityCore/TrinityCore",
+    "for": "Open-source server core; adapter planned"
+   },
+   {
+    "name": "CMaNGOS",
+    "url": "https://github.com/cmangos",
+    "for": "Open-source server cores for the earlier eras; adapter planned"
+   },
+   {
+    "name": "Project Eternal mod-p2p",
+    "url": "https://github.com/Project-Eternal/mod-p2p",
+    "for": "Live play between player-run servers; the shared identity format (by IS4)"
+   },
+   {
+    "name": "Sigstore Rekor and Sigsum",
+    "url": "https://docs.sigstore.dev/logging/overview/",
+    "for": "Append-only transparency logs: the model for waystation witness logs"
+   },
+   {
+    "name": "Nostr",
+    "url": "https://nostrcg.github.io/devguide/protocol/overview",
+    "for": "Signed events on simple relays: the closest model to the network's records"
+   },
+   {
+    "name": "atproto (Bluesky)",
+    "url": "https://atproto.com/blog/rpg-actor",
+    "for": "Player-held character records checked by issuers: the same idea as passports and witnesses"
+   },
+   {
+    "name": "iroh",
+    "url": "https://pinggy.io/blog/iroh_1_0_dial_keys_not_ips/",
+    "for": "Dial keys, not IPs: a candidate for direct links between nodes"
+   },
+   {
+    "name": "OpenSimulator Hypergrid",
+    "url": "https://hypergridbusiness.com/?p=51141",
+    "for": "Years of avatars travelling between independent grids, and the lessons about items, patches and rogue hosts"
+   },
+   {
+    "name": "All Contributors",
+    "url": "https://allcontributors.org/docs/en/specification",
+    "for": "Credit for every kind of contribution, not just code"
+   }
+  ]
+ }
 }
