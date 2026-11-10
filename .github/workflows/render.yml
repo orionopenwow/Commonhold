@@ -38,7 +38,7 @@ jobs:
           if [ "$HAS_KEY" != "true" ]; then echo "::warning::No RENDER_DEPLOY_KEY yet, so the README wasn't updated on main (the console still is)."; exit 0; fi
           git config user.name "commonhold-render"
           git config user.email "render@users.noreply.github.com"
-          git add README.md CREDITS.md CODEOWNERS site/status.json joint/chronicle.md
+          git add README.md CREDITS.md CODEOWNERS site/status.json site/index.html joint/chronicle.md
           git commit -m "render: living README, credits and console data [skip ci]"
           git push origin HEAD:main
       - name: Sync wiki/ to the GitHub wiki

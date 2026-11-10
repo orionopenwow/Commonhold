@@ -1,0 +1,267 @@
+<title>Commonhold Console</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a registry hall. Pulse strip on top, the shared work (spec, roadmap, ships) in the wide column,
+   the people and doors beside it, and the wiki reader as its own view. */
+:root {
+  --bg: #eef2f0; --surface: #ffffff; --ink: #16211e; --muted: #5a6a65; --line: #d5dfdb;
+  --accent: #1d6b5f; --accent-soft: #dcece8; --copper: #9a5a22; --copper-soft: #f3e6d8;
+  --ok: #2f7d4f; --warn: #a06a12; --idle: #8a9692;
+  --display: "Space Grotesk", "Segoe UI", system-ui, sans-serif;
+  --body: "Inter", "Segoe UI", system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0e1513; --surface: #15211e; --ink: #e2ebe8; --muted: #93a49f; --line: #26352f;
+  --accent: #5bb8a6; --accent-soft: #1b3330; --copper: #d99c62; --copper-soft: #33261a;
+  --ok: #6cc28c; --warn: #e0a84a; --idle: #6d7a76; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #0e1513; --surface: #15211e; --ink: #e2ebe8; --muted: #93a49f; --line: #26352f;
+  --accent: #5bb8a6; --accent-soft: #1b3330; --copper: #d99c62; --copper-soft: #33261a;
+  --ok: #6cc28c; --warn: #e0a84a; --idle: #6d7a76; color-scheme: dark }
+* { box-sizing: border-box }
+[hidden] { display: none !important }
+body { background: var(--bg); color: var(--ink); font: 15px/1.55 var(--body); margin: 0 }
+.wrap { max-width: 1160px; margin: 0 auto; padding-block: 28px 56px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)) }
+h1, h2, h3 { font-family: var(--display); text-wrap: balance; margin: 0 }
+h1 { font-size: clamp(28px, 4.2vw, 40px); letter-spacing: -0.01em }
+h2 { font-size: 13px; text-transform: uppercase; letter-spacing: .09em; color: var(--muted); font-weight: 700 }
+a { color: var(--accent) }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px }
+header { display: flex; flex-wrap: wrap; gap: 16px 32px; align-items: flex-end; justify-content: space-between;
+  padding-bottom: 20px; border-bottom: 1px solid var(--line) }
+.descriptor { color: var(--muted); margin-top: 4px }
+.tagline { font-family: var(--display); color: var(--copper); margin-top: 6px }
+nav { display: flex; gap: 6px }
+nav button { font: 500 14px var(--body); background: transparent; color: var(--muted); border: 1px solid var(--line);
+  border-radius: 999px; padding: 6px 14px; cursor: pointer }
+nav button[aria-current="page"] { background: var(--accent); color: var(--surface); border-color: var(--accent) }
+.pulse { display: flex; flex-wrap: wrap; gap: 10px 28px; padding: 18px 0 26px; font-variant-numeric: tabular-nums }
+.pulse div { display: flex; flex-direction: column }
+.pulse b { font-family: var(--display); font-size: 26px; line-height: 1.1 }
+.pulse span { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: .07em }
+.grid { display: grid; grid-template-columns: minmax(0, 1.65fr) minmax(0, 1fr); gap: 32px }
+@media (max-width: 860px) { .grid { grid-template-columns: minmax(0, 1fr) } }
+section { display: flex; flex-direction: column; gap: 12px; margin-bottom: 30px; min-width: 0 }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 4px 0 }
+.row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 12px; padding: 10px 16px; align-items: center }
+.row + .row { border-top: 1px solid var(--line) }
+.row small { color: var(--muted); display: block }
+.chip { font: 500 12px var(--body); border-radius: 999px; padding: 2px 10px; white-space: nowrap; border: 1px solid transparent }
+.chip.empty, .chip.todo { color: var(--idle); border-color: var(--line) }
+.chip.draft, .chip.doing, .chip.proposed, .chip.review { color: var(--warn); background: var(--copper-soft) }
+.chip.accepted, .chip.stable, .chip.done { color: var(--ok); background: var(--accent-soft) }
+.bar { display: flex; gap: 3px; height: 8px }
+.bar i { flex: 1; border-radius: 2px; background: var(--line) }
+.bar i.draft, .bar i.review { background: var(--copper) }
+.bar i.accepted, .bar i.stable { background: var(--accent) }
+.mono { font-family: var(--mono); font-size: 12.5px }
+.steward { color: var(--muted); font-family: var(--mono); font-size: 12px }
+.timeline { list-style: none; margin: 0; padding: 0 0 0 4px; position: relative }
+.timeline li { position: relative; padding: 0 0 14px 22px }
+.timeline li::before { content: ""; position: absolute; left: 4px; top: 7px; width: 9px; height: 9px; border-radius: 50%;
+  background: var(--surface); border: 2px solid var(--idle) }
+.timeline li::after { content: ""; position: absolute; left: 8px; top: 18px; bottom: 0; width: 1px; background: var(--line) }
+.timeline li:last-child::after { display: none }
+.timeline li.done::before { background: var(--accent); border-color: var(--accent) }
+.timeline li.doing::before { border-color: var(--copper) }
+.timeline .when { font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums }
+.members { display: grid; gap: 10px }
+.member { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; display: grid; gap: 6px }
+.member .top { display: flex; justify-content: space-between; gap: 8px; align-items: baseline; flex-wrap: wrap }
+.member h3 { font-size: 17px }
+.member p { margin: 0; color: var(--muted); font-size: 14px }
+.tags { display: flex; flex-wrap: wrap; gap: 6px }
+.tag { font: 500 11.5px var(--mono); color: var(--copper); background: var(--copper-soft); border-radius: 4px; padding: 1px 7px }
+.door { padding: 10px 16px }
+.door + .door { border-top: 1px solid var(--line) }
+.door b { font-family: var(--display) }
+.door small { color: var(--muted); display: block }
+.feed { list-style: none; margin: 0; padding: 0 }
+.feed li { display: grid; grid-template-columns: 86px minmax(0, 1fr); gap: 10px; padding: 8px 16px; font-size: 14px }
+.feed li + li { border-top: 1px solid var(--line) }
+.feed time { color: var(--muted); font-variant-numeric: tabular-nums; font-size: 13px }
+.records { overflow-x: auto }
+.records table { border-collapse: collapse; width: 100%; font-size: 13.5px }
+.records td, .records th { text-align: left; padding: 7px 16px; border-top: 1px solid var(--line); vertical-align: top }
+.records th { font-weight: 600; color: var(--muted); font-size: 12px; border-top: 0 }
+.reader { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 28px }
+@media (max-width: 760px) { .reader { grid-template-columns: minmax(0, 1fr) } }
+.pages { display: flex; flex-direction: column; gap: 2px }
+@media (max-width: 760px) { .pages { flex-direction: row; flex-wrap: wrap; gap: 6px } }
+.pages button { text-align: left; font: 500 14px var(--body); color: var(--ink); background: transparent; border: 0;
+  border-radius: 6px; padding: 7px 10px; cursor: pointer }
+.pages button[aria-current="true"] { background: var(--accent-soft); color: var(--accent) }
+article { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 22px 26px; min-width: 0; max-width: 72ch }
+article h1 { font-size: 26px; margin-bottom: 10px }
+article h2 { font-size: 14px; margin: 22px 0 6px }
+article code { font-family: var(--mono); font-size: 13px; background: var(--accent-soft); padding: 1px 5px; border-radius: 4px }
+article table { border-collapse: collapse; display: block; overflow-x: auto }
+article td, article th { border: 1px solid var(--line); padding: 5px 9px; text-align: left }
+.note { color: var(--muted); font-size: 13px }
+footer { margin-top: 36px; color: var(--muted); font-size: 13px; border-top: 1px solid var(--line); padding-top: 16px }
+@media (prefers-reduced-motion: no-preference) { .panel, .member { transition: border-color .15s } .member:hover { border-color: var(--accent) } }
+</style>
+
+<div class="wrap">
+  <header>
+    <div>
+      <h1 id="name">Commonhold</h1>
+      <div class="descriptor" id="descriptor">Open network for player-run worlds</div>
+      <div class="tagline" id="tagline"></div>
+    </div>
+    <nav aria-label="Views">
+      <button id="tab-overview" data-view="overview" aria-current="page">Overview</button>
+      <button id="tab-wiki" data-view="wiki">Wiki</button>
+      <a id="repo-link" class="chip" style="align-self:center" href="#" target="_blank" rel="noopener">Repository</a>
+    </nav>
+  </header>
+
+  <div class="pulse" id="pulse" aria-label="Project pulse"></div>
+
+  <main id="view-overview" class="grid">
+    <div>
+      <section>
+        <h2>The spec</h2>
+        <div class="bar" id="spec-bar" aria-hidden="true"></div>
+        <div class="panel" id="spec"></div>
+      </section>
+      <section>
+        <h2>Roadmap</h2>
+        <ol class="timeline" id="roadmap"></ol>
+      </section>
+      <section>
+        <h2>Recently shipped</h2>
+        <div class="panel"><ul class="feed" id="recent"></ul></div>
+      </section>
+      <section>
+        <h2>Signed records on the network</h2>
+        <div class="panel records">
+          <table>
+            <thead><tr><th>Type</th><th>Signed by</th><th>What it says</th></tr></thead>
+            <tbody>
+              <tr><td class="mono">realm</td><td>world key</td><td>Realm card: versions, modules, rates, rules, tier</td></tr>
+              <tr><td class="mono">charter</td><td>world key</td><td>Visit rules: league, tiers, caps, what may come and go</td></tr>
+              <tr><td class="mono">away</td><td>world key</td><td>A character is visiting elsewhere; the home copy is locked</td></tr>
+              <tr><td class="mono">visit</td><td>host key</td><td>What happened on a visit, against passport v(n)</td></tr>
+              <tr><td class="mono">witness</td><td>waystation key</td><td>Fingerprint of a passport version, append-only</td></tr>
+              <tr><td class="mono">closing</td><td>world key</td><td>A world is shutting down; final passports issued</td></tr>
+              <tr><td class="mono">block</td><td>2 of 3 council</td><td>A world or relay is delisted, with reason and expiry</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+    <aside>
+      <section>
+        <h2>Who's building it</h2>
+        <div class="members" id="members"></div>
+      </section>
+      <section>
+        <h2>Doors into the network</h2>
+        <div class="panel" id="doors"></div>
+      </section>
+      <section>
+        <h2>Open decisions</h2>
+        <div class="panel" id="decisions"></div>
+      </section>
+    </aside>
+  </main>
+
+  <main id="view-wiki" class="reader" hidden>
+    <div class="pages" id="pages" role="tablist" aria-label="Wiki pages"></div>
+    <article id="page"><p class="note">Pick a page.</p></article>
+  </main>
+
+  <footer id="footer">No owner, no money, no game files. Each member's work carries their name.
+    Not affiliated with or endorsed by any game publisher.</footer>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.1.6/purify.min.js"></script>
+<script>
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const LABEL = { empty: "empty", draft: "draft", review: "in review", accepted: "accepted", stable: "stable",
+  todo: "to do", doing: "in progress", done: "done", proposed: "proposed" };
+const chip = (s) => `<span class="chip ${esc(s)}">${esc(LABEL[s] || s)}</span>`;
+let STATUS = null;
+
+function render(st) {
+  STATUS = st;
+  $("name").textContent = st.project || "Commonhold";
+  $("descriptor").textContent = st.descriptor || "";
+  $("tagline").textContent = st.tagline || "";
+  if (st.repo) $("repo-link").href = "https://github.com/" + st.repo;
+  const secs = st.spec.sections || [], road = st.roadmap || [];
+  const doneMs = road.filter((p) => p.status === "done").length;
+  const drafted = secs.filter((s) => s.status !== "empty").length;
+  $("pulse").innerHTML = [
+    [st.age_days, "days in"], [st.members.length, "members"],
+    [`${st.spec.done}/${secs.length}`, "spec accepted"], [`${drafted}/${secs.length}`, "sections started"],
+    [`${doneMs}/${road.length}`, "milestones done"], [st.generated, "updated"],
+  ].map(([b, s]) => `<div><b>${esc(b)}</b><span>${esc(s)}</span></div>`).join("");
+
+  $("spec-bar").innerHTML = secs.map((s) => `<i class="${esc(s.status)}"></i>`).join("");
+  $("spec").innerHTML = secs.map((s) => `<div class="row"><div>${esc(s.title)}
+      <small class="steward">spec/${esc(s.id)}.md · steward ${esc(s.steward)}</small></div>${chip(s.status)}</div>`).join("");
+  $("roadmap").innerHTML = road.map((p) => `<li class="${esc(p.status)}"><div class="when">${esc(p.when)}</div>
+      <div>${esc(p.title)} ${p.status !== "todo" ? chip(p.status) : ""}</div></li>`).join("");
+  $("recent").innerHTML = (st.recent || []).map((r) => `<li><time>${esc(r.date)}</time>
+      <div><b>${esc(r.who)}</b> · ${esc(r.subject)}</div></li>`).join("") || `<li><time></time><div class="note">Nothing shipped yet.</div></li>`;
+
+  $("members").innerHTML = st.members.map((m) => {
+    const proj = m.project || {};
+    const projHtml = proj.name ? (proj.url ? `<a href="${esc(proj.url)}" target="_blank" rel="noopener">${esc(proj.name)}</a>` : esc(proj.name)) : "";
+    return `<div class="member"><div class="top"><h3>${esc(m.name || m.handle)}</h3>
+      <span class="mono">${m.github ? "@" + esc(m.github) : "members/" + esc(m.handle)}</span></div>
+      <p>${esc(m.role)}</p>
+      <div class="tags">${(m.stewards || []).map((s) => `<span class="tag">${esc(s)}</span>`).join("")}</div>
+      <small class="note">${projHtml}${projHtml ? " · " : ""}${esc(m.license || "")} · ${m.credit.commits} ${m.credit.commits === 1 ? "commit" : "commits"}</small></div>`;
+  }).join("");
+  $("doors").innerHTML = (st.doors || []).map((d) => `<div class="door"><b>${d.url ? `<a href="${esc(d.url)}" target="_blank" rel="noopener">${esc(d.name)}</a>` : esc(d.name)}</b>
+      <small>${esc(d.what)} · ${esc(d.by)}</small></div>`).join("");
+  const open = (st.decisions || []).filter((d) => d.status === "proposed");
+  $("decisions").innerHTML = open.map((d) => `<div class="row"><div>${esc(d.title)}<small>proposed by ${esc(d.proposed_by)} · ${esc(d.date)}</small></div>${chip(d.status)}</div>`).join("")
+    || `<div class="row"><div class="note">None open right now.</div></div>`;
+  $("pages").innerHTML = (st.wiki || []).map((p) => `<button role="tab" data-page="${esc(p)}" id="page-${esc(p.replace(/\W/g, "-"))}">${esc(p.replace(/\.md$/, "").replace(/-/g, " "))}</button>`).join("");
+}
+
+async function openPage(file) {
+  document.querySelectorAll("#pages button").forEach((b) => b.setAttribute("aria-current", String(b.dataset.page === file)));
+  const path = file.includes("/") ? file : "wiki/" + file;
+  try {
+    const r = await fetch(path);
+    if (!r.ok) throw new Error(r.status);
+    const html = window.marked ? marked.parse(await r.text()) : "<p>Couldn't load the Markdown reader.</p>";
+    $("page").innerHTML = window.DOMPurify ? DOMPurify.sanitize(html) : esc(html);
+  } catch (e) {
+    $("page").innerHTML = `<p class="note">This page isn't available here yet. Read it in the repository's wiki/ folder.</p>`;
+  }
+}
+
+$("page").addEventListener("click", (e) => {
+  const a = e.target.closest("a");
+  if (!a) return;
+  const href = a.getAttribute("href") || "";
+  if (/^[A-Za-z0-9-]+\.md$/.test(href)) { e.preventDefault(); openPage(href); }
+  else if (/^\.\.\/spec\/[a-z-]+\.md$/.test(href)) { e.preventDefault(); openPage(href.replace("../", "")); }
+});
+$("pages").addEventListener("click", (e) => { const b = e.target.closest("button"); if (b) openPage(b.dataset.page); });
+
+function show(view) {
+  const wiki = view === "wiki";
+  $("view-overview").hidden = wiki; $("view-wiki").hidden = !wiki;
+  $("tab-overview").toggleAttribute("aria-current", !wiki); $("tab-wiki").toggleAttribute("aria-current", wiki);
+  if (!wiki) $("tab-overview").setAttribute("aria-current", "page"); else $("tab-wiki").setAttribute("aria-current", "page");
+  if (wiki && STATUS && !document.querySelector('#pages button[aria-current="true"]')) openPage((STATUS.wiki || [])[0] || "Home.md");
+}
+document.querySelectorAll("nav button").forEach((b) => b.addEventListener("click", () => { location.hash = b.dataset.view; }));
+window.addEventListener("hashchange", () => show(location.hash.slice(1)));
+
+fetch("status.json").then((r) => r.json()).then((st) => { render(st); show(location.hash.slice(1)); })
+  .catch(() => { $("pulse").innerHTML = `<div class="note">Couldn't load status.json. The render job writes it after the first merge.</div>`; });
+</script>

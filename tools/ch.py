@@ -341,6 +341,8 @@ def build_status(root: Path = ROOT, today: dt.date | None = None) -> dict:
     roadmap = load_yaml(root / "joint" / "roadmap.yml", {}) or {}
     decisions = []
     for p in sorted((root / "joint" / "decisions").glob("*.md")):
+        if p.stem.startswith("0000"):
+            continue
         meta, title = front_matter(p.read_text(encoding="utf-8"))
         decisions.append({"id": p.stem, "title": meta.get("title") or title or p.stem,
                           "status": meta.get("status", "proposed"), "proposed_by": meta.get("proposed_by", ""),
@@ -359,7 +361,8 @@ def build_status(root: Path = ROOT, today: dt.date | None = None) -> dict:
         if len(recent) < 12 and not c["subject"].startswith("render:"):
             recent.append({"date": c["date"][:10], "who": h or c["name"], "subject": c["subject"][:100]})
     started = dt.date.fromisoformat(str(cfg.get("started", today.isoformat())))
-    wiki = sorted(p.name for p in (root / "wiki").glob("*.md") if not p.name.startswith("_"))
+    wiki = sorted((p.name for p in (root / "wiki").glob("*.md") if not p.name.startswith("_")),
+                  key=lambda n: (n != "Home.md", n))
     secs = spec.get("sections", [])
     return {
         "project": cfg.get("project", "Commonhold"), "descriptor": cfg.get("descriptor", ""),
@@ -496,6 +499,12 @@ def cmd_render(a) -> int:
     (root / "CREDITS.md").write_text(render_credits(st), encoding="utf-8")
     (root / "CODEOWNERS").write_text(render_codeowners(load_config(root), load_members(root)), encoding="utf-8")
     (root / "site").mkdir(exist_ok=True)
+    console = root / "site" / "console.html"
+    if console.exists():   # the console is written without a document skeleton; GitHub Pages needs one
+        (root / "site" / "index.html").write_text(
+            '<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n'
+            '<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n</head>\n<body>\n'
+            + console.read_text(encoding="utf-8") + "\n</body>\n</html>\n", encoding="utf-8")
     (root / "site" / "status.json").write_text(json.dumps(st, indent=1, ensure_ascii=False, default=str) + "\n", encoding="utf-8")
     print(f"RENDER OK: {len(st['members'])} members, spec {st['spec']['done']}/{len(st['spec']['sections'])}, "
           f"{len(st['recent'])} recent ships")
