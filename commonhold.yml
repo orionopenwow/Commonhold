@@ -2,7 +2,7 @@
 project: Commonhold
 descriptor: Open network for player-run worlds
 tagline: "Your world, connected; your character, unkillable."   # TODO(group): pick the tagline together
-repo: commonhold/commonhold                                      # TODO(owner): the real org/repo once created
+repo: orionopenwow/Commonhold        # TODO(owner): move to a neutral org later (Settings, Transfer keeps old links working)
 started: 2026-11-10
 
 rules:

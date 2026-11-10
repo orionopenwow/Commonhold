@@ -2,7 +2,7 @@
  "project": "Commonhold",
  "descriptor": "Open network for player-run worlds",
  "tagline": "Your world, connected; your character, unkillable.",
- "repo": "commonhold/commonhold",
+ "repo": "orionopenwow/Commonhold",
  "generated": "2026-11-10",
  "age_days": 0,
  "members": [
@@ -67,21 +67,22 @@
    },
    "joined": "2026-11-10",
    "credit": {
-    "commits": 1,
+    "commits": 3,
     "areas": {
-     ".github": 6,
-     "root": 11,
-     "community": 1,
+     "community": 7,
+     ".github": 7,
+     "root": 15,
+     "site": 3,
+     "tools": 3,
      "joint": 8,
      "members/is4": 2,
      "members/maweu": 2,
      "members/orion": 2,
      "members/wrekczar": 2,
      "spec": 11,
-     "tools": 2,
      "wiki": 6
     },
-    "last": "2026-11-10T12:20:21-07:00"
+    "last": "2026-11-10T14:01:22-07:00"
    }
   },
   {
@@ -243,6 +244,16 @@
   }
  ],
  "recent": [
+  {
+   "date": "2026-11-10",
+   "who": "orion",
+   "subject": "Discord: slim developer layout, one-run setup bot with pinned purpose posts"
+  },
+  {
+   "date": "2026-11-10",
+   "who": "orion",
+   "subject": "Console, rendered living sections, setup guide"
+  },
   {
    "date": "2026-11-10",
    "who": "orion",

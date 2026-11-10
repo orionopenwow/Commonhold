@@ -7,8 +7,7 @@ forever, even if a server shuts down. No owner, no money, no game files: just si
 Day **0** · **4** members · spec 0/8 sections accepted · 0/9 milestones done · updated 2026-11-10
 <!-- ch:pulse:end -->
 
-[Console](https://commonhold.github.io/commonhold/) · [Wiki](wiki/Home.md) · [Spec](spec/README.md) · [Credits](CREDITS.md) · [How to join](wiki/How-to-join.md)
-<!-- TODO(owner): fix the console link once the org name is final -->
+[Console](https://orionopenwow.github.io/Commonhold/) · [Wiki](wiki/Home.md) · [Spec](spec/README.md) · [Credits](CREDITS.md) · [How to join](wiki/How-to-join.md)
 
 ## Who's building it
 
@@ -19,7 +18,7 @@ Each member keeps their own project and name. Commonhold is the shared road betw
 |---|---|---|---|---|
 | **IS4**  | Shared identity, live play across player-run servers (mod-p2p), spec quality | [Project Eternal mod-p2p](https://github.com/Project-Eternal/mod-p2p) | MPL-2.0 | 0 |
 | **Maweu**  | Shutdown resilience and backups, local tamper-proof passports, anti-selling, safety policy, fair listing |  | Apache-2.0 | 0 |
-| **Orion** [@orionopenwow](https://github.com/orionopenwow) | Directory and realm cards, relays, one-click hosting and joining, the community workspace | [Leyline](https://leylinelauncher.com) | Apache-2.0 | 1 |
+| **Orion** [@orionopenwow](https://github.com/orionopenwow) | Directory and realm cards, relays, one-click hosting and joining, the community workspace | [Leyline](https://leylinelauncher.com) | Apache-2.0 | 3 |
 | **Leon (Wrekczar)**  | Character Passport, Customs Vault, three-way reconciliation, visit rules | Worlds of CoreCraft | Leon's choice | 0 |
 <!-- ch:members:end -->
 
@@ -67,6 +66,8 @@ Spec **v0.1-draft**: 0 of 8 sections accepted.
 ## Recently shipped
 
 <!-- ch:recent:start -->
+- 2026-11-10 · **orion** · Discord: slim developer layout, one-run setup bot with pinned purpose posts
+- 2026-11-10 · **orion** · Console, rendered living sections, setup guide
 - 2026-11-10 · **orion** · Commonhold workspace: folders, guard, living README, console, wiki, spec skeleton
 <!-- ch:recent:end -->
 
