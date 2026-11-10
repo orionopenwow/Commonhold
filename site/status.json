@@ -67,12 +67,12 @@
    },
    "joined": "2026-11-10",
    "credit": {
-    "commits": 3,
+    "commits": 4,
     "areas": {
+     "root": 18,
+     "site": 4,
      "community": 7,
      ".github": 7,
-     "root": 15,
-     "site": 3,
      "tools": 3,
      "joint": 8,
      "members/is4": 2,
@@ -82,7 +82,7 @@
      "spec": 11,
      "wiki": 6
     },
-    "last": "2026-11-10T14:01:22-07:00"
+    "last": "2026-11-10T14:06:26-07:00"
    }
   },
   {
@@ -244,6 +244,11 @@
   }
  ],
  "recent": [
+  {
+   "date": "2026-11-10",
+   "who": "orion",
+   "subject": "Point the workspace at orionopenwow/Commonhold"
+  },
   {
    "date": "2026-11-10",
    "who": "orion",

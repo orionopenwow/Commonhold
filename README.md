@@ -1,24 +1,70 @@
-# Commonhold
+<p align="center">
+  <img src="art/commonhold-logo-256.png" alt="Commonhold: a cottage whose door is a swirling portal" width="180">
+</p>
 
-**Open network for player-run worlds.** Run your own world, play with everyone else, and keep your character
-forever, even if a server shuts down. No owner, no money, no game files: just signed records that anyone can check.
+<h1 align="center">Commonhold</h1>
+
+<p align="center">
+  <b>An open protocol for player-run worlds.</b><br>
+  Run your own world. Play with everyone. Keep your character forever.
+</p>
+
+<p align="center">
+  <a href="https://orionopenwow.github.io/Commonhold/">Console</a> ·
+  <a href="wiki/Home.md">Wiki</a> ·
+  <a href="spec/README.md">Spec</a> ·
+  <a href="CREDITS.md">Credits</a> ·
+  <a href="#join-the-build">Join the build</a>
+</p>
 
 <!-- ch:pulse:start -->
 Day **0** · **4** members · spec 0/8 sections accepted · 0/9 milestones done · updated 2026-11-10
 <!-- ch:pulse:end -->
 
-[Console](https://orionopenwow.github.io/Commonhold/) · [Wiki](wiki/Home.md) · [Spec](spec/README.md) · [Credits](CREDITS.md) · [How to join](wiki/How-to-join.md)
+## The gist
+
+Servers shut down and take years of characters with them. Playing alone on your own server is safe but lonely.
+Commonhold is the way between: **everyone keeps their own world, and the worlds are connected.**
+
+- **It's a protocol, not an app.** This repo holds the spec, the shared decisions and each builder's work. There is
+  no Commonhold program to download, and there doesn't need to be one: launchers and server modules implement it.
+- **Nobody owns it.** The first apps speaking it are Leyline, Worlds of CoreCraft and Project Eternal, and each
+  keeps its own name. Anyone can build another.
+- **Only signed records travel.** No game files, no money, no accounts to make: a key is your identity, and every
+  listing, passport and visit is signed so anyone can check it.
+
+## What the protocol does
+
+| | |
+|---|---|
+| 🔑 **One identity** | One key per player, kept on your own PC. A different key per world you visit, so nobody can track you across them. |
+| 🗺️ **Realm cards** | Every world publishes a signed card: its version, rules, mods and what it accepts. Lists rank by published criteria, never by money. |
+| 🤝 **Live together** | Stay on your own server and play live with linked servers: parties, chat and trade across worlds. |
+| 🧳 **Visits** | Take your character to a friend's world and bring it home. Your home keeps the original; the host only proposes what changed, and you approve it. |
+| 🛡️ **Unkillable characters** | Your launcher always keeps the latest signed copy. Community waystations keep fingerprints, so a character can move to a new home when its world closes. |
+| ⚖️ **Charters and leagues** | Each world sets its own rules for visitors. Worlds with matching rules form leagues, so visits between them are smooth. |
+| 🚫 **What never travels** | Game files, gold, money, and anything decompiled or recompiled. |
+
+## Join the build
+
+1. **Ask for a folder.** Open a [dev request](../../issues/new?template=dev-request.md) or message Orion on
+   Discord with your GitHub name and what you'd like to work on.
+2. **Your folder is yours.** You get `members/<you>/`, which only you can change. Put anything in it and ship with
+   `Ship my folder.bat` (Windows) or `./ship.sh`: it merges by itself once the guard check passes.
+3. **Shared work is reviewed.** `joint/` and `wiki/` need 2 other members to approve; `spec/` needs 3, including
+   that section's steward. The guard tells you whose approval a change needs.
+
+Ground rules: no game files, no secrets, no money, clean provenance, sign off your commits (`git commit -s`).
+More in [CHARTER.md](CHARTER.md), [GOVERNANCE.md](GOVERNANCE.md) and [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Who's building it
-
-Each member keeps their own project and name. Commonhold is the shared road between them.
 
 <!-- ch:members:start -->
 | Member | Brings | Project | Licence of their folder | Commits |
 |---|---|---|---|---|
 | **IS4**  | Shared identity, live play across player-run servers (mod-p2p), spec quality | [Project Eternal mod-p2p](https://github.com/Project-Eternal/mod-p2p) | MPL-2.0 | 0 |
 | **Maweu**  | Shutdown resilience and backups, local tamper-proof passports, anti-selling, safety policy, fair listing |  | Apache-2.0 | 0 |
-| **Orion** [@orionopenwow](https://github.com/orionopenwow) | Directory and realm cards, relays, one-click hosting and joining, the community workspace | [Leyline](https://leylinelauncher.com) | Apache-2.0 | 3 |
+| **Orion** [@orionopenwow](https://github.com/orionopenwow) | Directory and realm cards, relays, one-click hosting and joining, the community workspace | [Leyline](https://leylinelauncher.com) | Apache-2.0 | 4 |
 | **Leon (Wrekczar)**  | Character Passport, Customs Vault, three-way reconciliation, visit rules | Worlds of CoreCraft | Leon's choice | 0 |
 <!-- ch:members:end -->
 
@@ -66,6 +112,7 @@ Spec **v0.1-draft**: 0 of 8 sections accepted.
 ## Recently shipped
 
 <!-- ch:recent:start -->
+- 2026-11-10 · **orion** · Point the workspace at orionopenwow/Commonhold
 - 2026-11-10 · **orion** · Discord: slim developer layout, one-run setup bot with pinned purpose posts
 - 2026-11-10 · **orion** · Console, rendered living sections, setup guide
 - 2026-11-10 · **orion** · Commonhold workspace: folders, guard, living README, console, wiki, spec skeleton
@@ -77,17 +124,8 @@ Spec **v0.1-draft**: 0 of 8 sections accepted.
 - **2026-11-10**: IS4 (Project Eternal), Leon (Worlds of CoreCraft), Maweu and Orion (Leyline) agree to link their work into one open network.
 <!-- ch:chronicle:end -->
 
-## How this repository works
-
-- **`members/<you>/` is yours.** Ship with `python tools/ch.py ship -m "..."` (or `Ship my folder.bat`); it merges by
-  itself once the guard check passes. Nobody else can change it without your approval.
-- **`joint/` and `wiki/`** need 2 other members to approve. **`spec/`** needs 3, including the section's steward.
-- **The guard** blocks game files, executables, secrets and large binaries in every pull request.
-- **This README rewrites its own sections** every day and after every merge, from member files, the spec status,
-  the roadmap, decisions and history. Edit the text outside the marked sections by pull request like anything else.
-
-Read [CHARTER.md](CHARTER.md) and [GOVERNANCE.md](GOVERNANCE.md) before your first pull request.
-
 ---
-Spec and shared code: Apache-2.0. Each member folder keeps its owner's licence (see that folder's `member.yml`).
-Not affiliated with or endorsed by any game publisher. Players use their own clients and game files.
+
+<sub>This README rewrites its own sections after every merge and once a day. Edit the text outside the marked
+sections by pull request. Spec and shared code: Apache-2.0; each member folder keeps its owner's licence. Not
+affiliated with or endorsed by any game publisher; players use their own clients and game files.</sub>
