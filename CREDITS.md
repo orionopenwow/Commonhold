@@ -8,8 +8,8 @@ to change how you're credited. Every piece of Commonhold carries its author's na
 - **Brings:** Directory and realm cards, relays, one-click hosting and joining, the community workspace
 - **Project:** [Leyline](https://leylinelauncher.com)
 - **Steward of:** directory, relays
-- **Worked on:** root (20), spec (11), .github (8), site (8), joint (8), community (7)
-- **Commits:** 5
+- **Worked on:** root (28), spec (11), joint (9), site (9), wiki (9), .github (8)
+- **Commits:** 6
 - **Contributed:**
   - Started Commonhold and this workspace; the Leyline launcher, host kit, relays and signed realm listings it builds on
   - The "unified network, nobody owns it" direction, the seeded big world, free and signed hosting for the record

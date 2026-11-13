@@ -18,7 +18,7 @@
 </p>
 
 <!-- ch:pulse:start -->
-Day **0** · **4** members · spec 0/8 sections accepted · 0/9 milestones done · updated 2026-11-10
+Day **2** · **4** members · spec 0/8 sections accepted · 0/9 milestones done · updated 2026-11-12
 <!-- ch:pulse:end -->
 
 ## The gist
@@ -69,7 +69,7 @@ More in [CHARTER.md](CHARTER.md), [GOVERNANCE.md](GOVERNANCE.md) and [CONTRIBUTI
 |---|---|---|---|---|
 | **IS4**  | Shared identity, live play across player-run servers (mod-p2p), spec quality | [Project Eternal mod-p2p](https://github.com/Project-Eternal/mod-p2p) | MPL-2.0 | 0 |
 | **Maweu**  | Shutdown resilience and backups, local tamper-proof passports, anti-selling, safety policy, fair listing |  | Apache-2.0 | 0 |
-| **Orion** [@orionopenwow](https://github.com/orionopenwow) | Directory and realm cards, relays, one-click hosting and joining, the community workspace | [Leyline](https://leylinelauncher.com) | Apache-2.0 | 5 |
+| **Orion** [@orionopenwow](https://github.com/orionopenwow) | Directory and realm cards, relays, one-click hosting and joining, the community workspace | [Leyline](https://leylinelauncher.com) | Apache-2.0 | 6 |
 | **Leon (Wrekczar)**  | Character Passport, Customs Vault, three-way reconciliation, visit rules | Worlds of CoreCraft | Leon's choice | 0 |
 <!-- ch:members:end -->
 
@@ -129,6 +129,7 @@ Spec **v0.1-draft**: 0 of 8 sections accepted.
 ## Recently shipped
 
 <!-- ch:recent:start -->
+- 2026-11-10 · **orion** · Credit everyone, Get latest and a safer ship, working together guide, how we build, AI assistant ins
 - 2026-11-10 · **orion** · README: logo, the gist, what the protocol does, join the build; dev request template; logo in the co
 - 2026-11-10 · **orion** · Point the workspace at orionopenwow/Commonhold
 - 2026-11-10 · **orion** · Discord: slim developer layout, one-run setup bot with pinned purpose posts

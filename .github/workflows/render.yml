@@ -55,9 +55,14 @@ jobs:
           mkdir -p site/wiki site/spec
           cp wiki/*.md site/wiki/
           cp spec/*.md site/spec/
+      # the console goes online once Pages is on (Settings > Pages > Source: GitHub Actions); until then these skip
       - uses: actions/configure-pages@v5
+        id: pages
+        continue-on-error: true
       - uses: actions/upload-pages-artifact@v3
+        if: steps.pages.outcome == 'success'
         with:
           path: site
       - id: deploy
+        if: steps.pages.outcome == 'success'
         uses: actions/deploy-pages@v4

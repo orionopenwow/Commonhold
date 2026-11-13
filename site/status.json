@@ -3,8 +3,8 @@
  "descriptor": "Open network for player-run worlds",
  "tagline": "Your world, connected; your character, unkillable.",
  "repo": "orionopenwow/Commonhold",
- "generated": "2026-11-10",
- "age_days": 0,
+ "generated": "2026-11-12",
+ "age_days": 2,
  "members": [
   {
    "handle": "is4",
@@ -82,23 +82,23 @@
     "The \"unified network, nobody owns it\" direction, the seeded big world, free and signed hosting for the record"
    ],
    "credit": {
-    "commits": 5,
+    "commits": 6,
     "areas": {
+     "root": 28,
+     "joint": 9,
+     "members/is4": 3,
+     "members/maweu": 3,
+     "members/orion": 3,
+     "members/wrekczar": 3,
+     "site": 9,
+     "tools": 5,
+     "wiki": 9,
      ".github": 8,
-     "root": 20,
      "art": 2,
-     "site": 8,
      "community": 7,
-     "tools": 3,
-     "joint": 8,
-     "members/is4": 2,
-     "members/maweu": 2,
-     "members/orion": 2,
-     "members/wrekczar": 2,
-     "spec": 11,
-     "wiki": 6
+     "spec": 11
     },
-    "last": "2026-11-10T14:13:59-07:00"
+    "last": "2026-11-10T14:37:25-07:00"
    }
   },
   {
@@ -266,6 +266,11 @@
   }
  ],
  "recent": [
+  {
+   "date": "2026-11-10",
+   "who": "orion",
+   "subject": "Credit everyone, Get latest and a safer ship, working together guide, how we build, AI assistant ins"
+  },
   {
    "date": "2026-11-10",
    "who": "orion",
