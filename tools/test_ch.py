@@ -137,3 +137,15 @@ def test_sync_keeps_unshipped_work_and_takes_everyone_elses(tmp_path):
     assert (a / "members" / "is4" / "notes.md").read_text() == "from b\n"
     assert (a / "members" / "orion" / "draft.md").read_text() == "mine, not shipped\n"
     assert g(a, "branch", "--show-current").strip() == "main"
+
+
+def test_private_members_publish_no_name_or_contributions():
+    st = {"members": [ch.public_member("x", {"name": "Real Name", "role": "r", "contributed": ["c"], "credit": "private",
+                                            "stewards": ["identity"]}, {"commits": 0, "areas": {}, "last": None}),
+                      ch.public_member("o", {"name": "Orion"}, {"commits": 1, "areas": {}, "last": None})],
+          "spec": {"version": "0.1", "sections": [], "done": 0}, "roadmap": [], "decisions": [], "recent": [],
+          "age_days": 1, "generated": "2026-11-17", "thanks": {}}
+    text = ch.render_credits(st) + "\n".join(ch.render_sections(st).values())
+    assert "Real Name" not in text and "contributed" not in str(st["members"][0])
+    assert "1 more member is credited privately" in text and "Orion" in text
+    assert st["members"][0]["stewards"] == ["identity"]

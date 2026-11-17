@@ -3,60 +3,35 @@
  "descriptor": "Open network for player-run worlds",
  "tagline": "Your world, connected; your character, unkillable.",
  "repo": "orionopenwow/Commonhold",
- "generated": "2026-11-12",
- "age_days": 2,
+ "generated": "2026-11-17",
+ "age_days": 7,
  "members": [
   {
    "handle": "is4",
-   "name": "IS4",
-   "github": "",
-   "role": "Shared identity, live play across player-run servers (mod-p2p), spec quality",
-   "project": {
-    "name": "Project Eternal mod-p2p",
-    "url": "https://github.com/Project-Eternal/mod-p2p"
-   },
-   "stewards": [
-    "identity"
-   ],
-   "license": "MPL-2.0",
-   "joined": "2026-11-10",
-   "contributed": [
-    "mod-p2p (Project Eternal): live play across player-run servers, with a byte-exact public spec",
-    "The identity Commonhold adopts: Ed25519 account keys, derived character IDs, signed certificates",
-    "Escrowed transfers between servers, the pattern behind the Customs Vault's design"
-   ],
+   "private": true,
    "credit": {
     "commits": 0,
     "areas": {},
     "last": null
-   }
+   },
+   "stewards": [
+    "identity"
+   ],
+   "joined": "2026-11-10"
   },
   {
    "handle": "maweu",
-   "name": "Maweu",
-   "github": "",
-   "role": "Shutdown resilience and backups, local tamper-proof passports, anti-selling, safety policy, fair listing",
-   "project": {
-    "name": "",
-    "url": ""
+   "private": true,
+   "credit": {
+    "commits": 0,
+    "areas": {},
+    "last": null
    },
    "stewards": [
     "resilience",
     "policy"
    ],
-   "license": "Apache-2.0",
-   "joined": "2026-11-10",
-   "contributed": [
-    "Shutdown resilience: characters that survive a server closing, migration and backups",
-    "Local, tamper-proof passports and selling characters made hard without invasive checks",
-    "The hosting safety policy, and fair listing (\"Official looks like an ad\")",
-    "Session worlds on a laptop with opt-in write-back; resilience as the reason people join"
-   ],
-   "credit": {
-    "commits": 0,
-    "areas": {},
-    "last": null
-   }
+   "joined": "2026-11-10"
   },
   {
    "handle": "orion",
@@ -82,51 +57,38 @@
     "The \"unified network, nobody owns it\" direction, the seeded big world, free and signed hosting for the record"
    ],
    "credit": {
-    "commits": 6,
+    "commits": 7,
     "areas": {
-     "root": 28,
+     ".github": 10,
+     "root": 30,
+     "site": 10,
+     "spec": 14,
+     "tools": 7,
      "joint": 9,
      "members/is4": 3,
      "members/maweu": 3,
      "members/orion": 3,
      "members/wrekczar": 3,
-     "site": 9,
-     "tools": 5,
      "wiki": 9,
-     ".github": 8,
      "art": 2,
-     "community": 7,
-     "spec": 11
+     "community": 7
     },
-    "last": "2026-11-10T14:37:25-07:00"
+    "last": "2026-11-12T22:38:59-07:00"
    }
   },
   {
    "handle": "wrekczar",
-   "name": "Leon (Wrekczar)",
-   "github": "",
-   "role": "Character Passport, Customs Vault, three-way reconciliation, visit rules",
-   "project": {
-    "name": "Worlds of CoreCraft",
-    "url": ""
+   "private": true,
+   "credit": {
+    "commits": 0,
+    "areas": {},
+    "last": null
    },
    "stewards": [
     "passport",
     "customs"
    ],
-   "license": "Leon's choice",
-   "joined": "2026-11-10",
-   "contributed": [
-    "Worlds of CoreCraft, the project the visits idea comes from (\"go over to a friend's house\" with your own character)",
-    "The Character Passport, with the first working round trip between two servers",
-    "The Customs Vault, three-way reconciliation on return, temporary rows for visitors, federation lockouts",
-    "The hub-and-spoke design and \"Keeping Things Practical\" (auction house, gold, dupes)"
-   ],
-   "credit": {
-    "commits": 0,
-    "areas": {},
-    "last": null
-   }
+   "joined": "2026-11-10"
   }
  ],
  "spec": {
@@ -267,6 +229,11 @@
  ],
  "recent": [
   {
+   "date": "2026-11-12",
+   "who": "orion",
+   "subject": "Spec v0.1 drafts: signed records and identity, grounded in what Leyline runs; reference checker with"
+  },
+  {
    "date": "2026-11-10",
    "who": "orion",
    "subject": "Credit everyone, Get latest and a safer ship, working together guide, how we build, AI assistant ins"
@@ -315,38 +282,17 @@
   },
   {
    "name": "Worlds of CoreCraft",
-   "by": "wrekczar",
    "what": "Character Passport and Customs Vault: visits between independent worlds",
    "url": ""
   },
   {
    "name": "Project Eternal mod-p2p",
-   "by": "is4",
    "what": "Live play across player-run servers with shared identity",
    "url": "https://github.com/Project-Eternal/mod-p2p"
   }
  ],
  "thanks": {
-  "people": [
-   {
-    "name": "Akuma",
-    "github": "",
-    "found_via": "Discord",
-    "for": "First host to hit and report the host kit's 'invalid reference format' error, which got it fixed for everyone"
-   },
-   {
-    "name": "Squishy",
-    "github": "",
-    "found_via": "Discord",
-    "for": "Reported that single player couldn't be picked in the server list, which led to both local worlds becoming proper rows"
-   },
-   {
-    "name": "z… [BFLD]",
-    "github": "",
-    "found_via": "Discord",
-    "for": "Asked whether this could be a fork of an existing core, which shaped the 'stock cores, open protocol' answer"
-   }
-  ],
+  "people": [],
   "projects": [
    {
     "name": "AzerothCore",
@@ -366,7 +312,7 @@
    {
     "name": "Project Eternal mod-p2p",
     "url": "https://github.com/Project-Eternal/mod-p2p",
-    "for": "Live play between player-run servers; the shared identity format (by IS4)"
+    "for": "Live play between player-run servers; the shared identity format"
    },
    {
     "name": "Sigstore Rekor and Sigsum",

@@ -14,6 +14,6 @@ by one public key.
 ## Why
 Two identity formats would split the community into two keys, two modules and two sets of tools.
 
-## Open questions for the identity steward (IS4)
+## Open questions for the identity steward
 - Can a per-world key be derived without changing mod-p2p's character IDs?
 - Shared test vectors: where do they live, and who signs them?

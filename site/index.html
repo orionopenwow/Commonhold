@@ -189,7 +189,7 @@ footer { margin-top: 36px; color: var(--muted); font-size: 13px; border-top: 1px
     <article id="page"><p class="note">Pick a page.</p></article>
   </main>
 
-  <footer id="footer">No owner, no money, no game files. Each member's work carries their name.
+  <footer id="footer">No owner, no money, no game files. Each member's work carries their name, unless they'd rather be credited privately.
     Not affiliated with or endorsed by any game publisher.</footer>
 </div>
 
@@ -226,7 +226,8 @@ function render(st) {
   $("recent").innerHTML = (st.recent || []).map((r) => `<li><time>${esc(r.date)}</time>
       <div><b>${esc(r.who)}</b> · ${esc(r.subject)}</div></li>`).join("") || `<li><time></time><div class="note">Nothing shipped yet.</div></li>`;
 
-  $("members").innerHTML = st.members.map((m) => {
+  const priv = st.members.filter((m) => m.private).length;
+  $("members").innerHTML = st.members.filter((m) => !m.private).map((m) => {
     const proj = m.project || {};
     const projHtml = proj.name ? (proj.url ? `<a href="${esc(proj.url)}" target="_blank" rel="noopener">${esc(proj.name)}</a>` : esc(proj.name)) : "";
     return `<div class="member"><div class="top"><h3>${esc(m.name || m.handle)}</h3>
@@ -234,9 +235,9 @@ function render(st) {
       <p>${esc(m.role)}</p>
       <div class="tags">${(m.stewards || []).map((s) => `<span class="tag">${esc(s)}</span>`).join("")}</div>
       <small class="note">${projHtml}${projHtml ? " · " : ""}${esc(m.license || "")} · ${m.credit.commits} ${m.credit.commits === 1 ? "commit" : "commits"}</small></div>`;
-  }).join("");
+  }).join("") + (priv ? `<p class="note">${priv} more ${priv === 1 ? "member is" : "members are"} credited privately, at their request.</p>` : "");
   $("doors").innerHTML = (st.doors || []).map((d) => `<div class="door"><b>${d.url ? `<a href="${esc(d.url)}" target="_blank" rel="noopener">${esc(d.name)}</a>` : esc(d.name)}</b>
-      <small>${esc(d.what)} · ${esc(d.by)}</small></div>`).join("");
+      <small>${esc(d.what)}${d.by ? " · " + esc(d.by) : ""}</small></div>`).join("");
   const open = (st.decisions || []).filter((d) => d.status === "proposed");
   $("decisions").innerHTML = open.map((d) => `<div class="row"><div>${esc(d.title)}<small>proposed by ${esc(d.proposed_by)} · ${esc(d.date)}</small></div>${chip(d.status)}</div>`).join("")
     || `<div class="row"><div class="note">None open right now.</div></div>`;

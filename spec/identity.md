@@ -1,6 +1,6 @@
 # Identity and keys
 
-Steward: IS4 · Status: draft (v0.1) · Depends on: [records](records.md)
+Steward: is4 · Status: draft (v0.1) · Depends on: [records](records.md)
 
 One person is one key. There are no accounts, emails or passwords on the network: a key made on the player's own PC
 is the identity, and everything about that player is a record signed by it.
@@ -35,7 +35,7 @@ accepts, for example a friend's. Leyline uses this for lasting logins on a frien
 
 - A character's id is derived from the player key, so a passport can only ever belong to one identity.
 - **Proposal:** follow mod-p2p's derivation, `SHA-256("p2p character" || account public key || nonce)[0:16]`, so
-  the same character has the same id in live play (mod-p2p) and on passports (Commonhold). **IS4 to confirm.**
+  the same character has the same id in live play (mod-p2p) and on passports (Commonhold). **The identity steward to confirm.**
 
 ## 5. Not trackable across worlds (to write)
 
@@ -68,6 +68,6 @@ One public key shown to every world would let anyone follow a player from world 
 ## To write
 
 - [ ] Vectors: seed → public key → id → X25519 key, and a sealed message
-- [ ] The character id, confirmed with IS4
+- [ ] The character id, confirmed with the identity steward
 - [ ] Visit-key derivation and the link record, with vectors
 - [ ] Recovery and re-binding records

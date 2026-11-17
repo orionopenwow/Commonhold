@@ -370,8 +370,7 @@ def build_status(root: Path = ROOT, today: dt.date | None = None) -> dict:
         "project": cfg.get("project", "Commonhold"), "descriptor": cfg.get("descriptor", ""),
         "tagline": cfg.get("tagline", ""), "repo": cfg.get("repo", ""),
         "generated": today.isoformat(), "age_days": (today - started).days,
-        "members": [{**{k: v for k, v in m.items() if k not in ("git_names",)}, "handle": h,
-                     "credit": credits[h]} for h, m in members.items()],
+        "members": [public_member(h, m, credits[h]) for h, m in members.items()],
         "spec": {"version": spec.get("version", "0.0"), "sections": secs,
                  "done": sum(1 for s in secs if s.get("status") in ("accepted", "stable"))},
         "roadmap": roadmap.get("phases", []),
@@ -379,6 +378,26 @@ def build_status(root: Path = ROOT, today: dt.date | None = None) -> dict:
         "doors": load_yaml(root / "joint" / "doors.yml", {}).get("doors", []) if (root / "joint" / "doors.yml").exists() else [],
         "thanks": load_yaml(root / "joint" / "thanks.yml", {}) or {},
     }
+
+
+PRIVATE_KEEP = ("stewards", "joined")   # a privately credited member shows only their handle and role in the rules
+
+
+def is_private(m: dict) -> bool:
+    return str(m.get("credit", "")).lower() == "private"
+
+
+def public_member(h: str, m: dict, credit: dict) -> dict:
+    """What the README, CREDITS.md and the console may show about a member. Members who asked to be credited
+    privately keep their folder, approvals and stewardship, but no name, project or contribution list is published."""
+    if is_private(m):
+        return {"handle": h, "private": True, "credit": credit, **{k: m[k] for k in PRIVATE_KEEP if k in m}}
+    return {**{k: v for k, v in m.items() if k not in ("git_names",)}, "handle": h, "credit": credit}
+
+
+def private_note(n: int) -> str:
+    return (f"{n} more {'member is' if n == 1 else 'members are'} credited privately, at their request."
+            if n else "")
 
 
 def front_matter(text: str) -> tuple[dict, str]:
@@ -404,12 +423,15 @@ def chip(s: str) -> str:
 def render_sections(st: dict) -> dict[str, str]:
     members = st["members"]
     rows = ["| Member | Brings | Project | Licence of their folder | Commits |", "|---|---|---|---|---|"]
-    for m in members:
+    for m in [m for m in members if not m.get("private")]:
         proj = m.get("project") or {}
         pj = f"[{proj.get('name')}]({proj.get('url')})" if proj.get("url") else proj.get("name", "")
         gh = f"[@{m['github']}](https://github.com/{m['github']})" if m.get("github") else ""
         rows.append(f"| **{m.get('name', m['handle'])}** {gh} | {m.get('role', '')} | {pj} | "
                     f"{m.get('license', 'Apache-2.0')} | {m['credit']['commits']} |")
+    hidden = private_note(sum(1 for m in members if m.get("private")))
+    if hidden:
+        rows += ["", hidden]
     spec = [f"Spec **v{st['spec']['version']}**: {st['spec']['done']} of {len(st['spec']['sections'])} sections accepted.",
             "", "| Section | Steward | Status |", "|---|---|---|"]
     spec += [f"| [{s.get('title', s['id'])}](spec/{s['id']}.md) | {s.get('steward', '')} | {chip(s.get('status'))} |"
@@ -433,18 +455,19 @@ def render_sections(st: dict) -> dict[str, str]:
         gh = f" [@{p['github']}](https://github.com/{p['github']})" if p.get("github") else ""
         thanks.append(f"- **{p['name']}**{gh}: {p.get('for', '')}")
     if th.get("projects"):
-        thanks.append("")
+        if thanks:
+            thanks.append("")
         thanks.append("Built on and learned from: " + ", ".join(f"[{x['name']}]({x['url']})" for x in th["projects"]) + ".")
     thanks.append("")
-    thanks.append("Everyone's full contribution is in [CREDITS.md](CREDITS.md).")
+    thanks.append("Everyone's full contribution is in [CREDITS.md](CREDITS.md). Some people are thanked privately, at their request.")
     return {"pulse": pulse, "thanks": "\n".join(thanks), "members": "\n".join(rows), "spec": "\n".join(spec), "roadmap": "\n".join(road),
             "decisions": "\n".join(dec), "recent": "\n".join(rec)}
 
 
 def render_credits(st: dict) -> str:
     out = ["# Credits", "", "Generated from `members/*/member.yml` and the project history. Edit your own `member.yml`",
-           "to change how you're credited. Every piece of Commonhold carries its author's name.", ""]
-    for m in sorted(st["members"], key=lambda m: -m["credit"]["commits"]):
+           "to change how you're credited, or set `credit: private` to be credited privately instead.", ""]
+    for m in sorted((m for m in st["members"] if not m.get("private")), key=lambda m: -m["credit"]["commits"]):
         proj = m.get("project") or {}
         out += [f"## {m.get('name', m['handle'])}" + (f" ([@{m['github']}](https://github.com/{m['github']}))" if m.get("github") else ""),
                 "", f"- **Brings:** {m.get('role', '')}"]
@@ -462,6 +485,9 @@ def render_credits(st: dict) -> str:
             out.append("- **Contributed:**")
             out += [f"  - {c}" for c in m["contributed"]]
         out.append("")
+    hidden = private_note(sum(1 for m in st["members"] if m.get("private")))
+    if hidden:
+        out += [hidden, ""]
     th = st.get("thanks") or {}
     if th.get("people"):
         out += ["## Thanks", "", "People whose ideas and reports shaped Commonhold. Want a folder of your own? Open a dev request.", ""]
