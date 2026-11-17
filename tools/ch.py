@@ -365,7 +365,9 @@ def build_status(root: Path = ROOT, today: dt.date | None = None) -> dict:
     started = dt.date.fromisoformat(str(cfg.get("started", today.isoformat())))
     wiki = sorted((p.name for p in (root / "wiki").glob("*.md") if not p.name.startswith("_")),
                   key=lambda n: (n != "Home.md", n))
-    secs = spec.get("sections", [])
+    stewards = cfg.get("spec_sections", {}) or {}
+    secs = [{**{k: v for k, v in sec.items() if k != "steward"},
+             "steward": steward_label(stewards.get(sec.get("id")), members)} for sec in spec.get("sections", [])]
     return {
         "project": cfg.get("project", "Commonhold"), "descriptor": cfg.get("descriptor", ""),
         "tagline": cfg.get("tagline", ""), "repo": cfg.get("repo", ""),
@@ -393,6 +395,13 @@ def public_member(h: str, m: dict, credit: dict) -> dict:
     if is_private(m):
         return {"handle": h, "private": True, "credit": credit, **{k: m[k] for k in PRIVATE_KEEP if k in m}}
     return {**{k: v for k, v in m.items() if k not in ("git_names",)}, "handle": h, "credit": credit}
+
+
+def steward_label(handle: str | None, members: dict) -> str:
+    """Who the README shows as a spec section's steward. The rules still use the handle from commonhold.yml."""
+    if not handle:
+        return ""
+    return "credited privately" if is_private(members.get(handle, {})) else handle
 
 
 def private_note(n: int) -> str:

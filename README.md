@@ -67,7 +67,7 @@ More in [CHARTER.md](CHARTER.md), [GOVERNANCE.md](GOVERNANCE.md) and [CONTRIBUTI
 <!-- ch:members:start -->
 | Member | Brings | Project | Licence of their folder | Commits |
 |---|---|---|---|---|
-| **Orion** [@orionopenwow](https://github.com/orionopenwow) | Directory and realm cards, relays, one-click hosting and joining, the community workspace | [Leyline](https://leylinelauncher.com) | Apache-2.0 | 7 |
+| **Orion** [@orionopenwow](https://github.com/orionopenwow) | Directory and realm cards, relays, one-click hosting and joining, the community workspace | [Leyline](https://leylinelauncher.com) | Apache-2.0 | 8 |
 
 3 more members are credited privately, at their request.
 <!-- ch:members:end -->
@@ -87,14 +87,14 @@ Spec **v0.1-draft**: 0 of 8 sections accepted.
 
 | Section | Steward | Status |
 |---|---|---|
-| [Identity and keys](spec/identity.md) | is4 | 🟨 draft |
+| [Identity and keys](spec/identity.md) | credited privately | 🟨 draft |
 | [Signed records](spec/records.md) | orion | 🟨 draft |
 | [Realm cards and tiers](spec/directory.md) | orion | ⬜ empty |
 | [Relays and transport](spec/relays.md) | orion | ⬜ empty |
-| [Character Passport](spec/passport.md) | wrekczar | ⬜ empty |
-| [Visits, charters and customs](spec/customs.md) | wrekczar | ⬜ empty |
-| [Witness logs and re-homing](spec/resilience.md) | maweu | ⬜ empty |
-| [Hosting, safety and privacy](spec/policy.md) | maweu | ⬜ empty |
+| [Character Passport](spec/passport.md) | credited privately | ⬜ empty |
+| [Visits, charters and customs](spec/customs.md) | credited privately | ⬜ empty |
+| [Witness logs and re-homing](spec/resilience.md) | credited privately | ⬜ empty |
+| [Hosting, safety and privacy](spec/policy.md) | credited privately | ⬜ empty |
 <!-- ch:spec:end -->
 
 ## Roadmap
@@ -124,6 +124,7 @@ Spec **v0.1-draft**: 0 of 8 sections accepted.
 ## Recently shipped
 
 <!-- ch:recent:start -->
+- 2026-11-17 · **orion** · Credit people privately, at their request
 - 2026-11-12 · **orion** · Spec v0.1 drafts: signed records and identity, grounded in what Leyline runs; reference checker with
 - 2026-11-10 · **orion** · Credit everyone, Get latest and a safer ship, working together guide, how we build, AI assistant ins
 - 2026-11-10 · **orion** · README: logo, the gist, what the protocol does, join the build; dev request template; logo in the co

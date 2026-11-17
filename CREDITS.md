@@ -8,8 +8,8 @@ to change how you're credited, or set `credit: private` to be credited privately
 - **Brings:** Directory and realm cards, relays, one-click hosting and joining, the community workspace
 - **Project:** [Leyline](https://leylinelauncher.com)
 - **Steward of:** directory, relays
-- **Worked on:** root (30), spec (14), .github (10), site (10), joint (9), wiki (9)
-- **Commits:** 7
+- **Worked on:** root (32), spec (15), joint (13), site (13), .github (10), tools (9)
+- **Commits:** 8
 - **Contributed:**
   - Started Commonhold and this workspace; the Leyline launcher, host kit, relays and signed realm listings it builds on
   - The "unified network, nobody owns it" direction, the seeded big world, free and signed hosting for the record

@@ -28,5 +28,6 @@ spec_sections:
   customs: wrekczar
   resilience: maweu
   policy: maweu
+  records: orion
   directory: orion
   relays: orion

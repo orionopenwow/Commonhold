@@ -1,7 +1,7 @@
 # The Commonhold specification
 
 Game-neutral by design: it talks about characters, item entries, maps and quests, never about any brand. Every
-section has a steward who must approve changes to it. Status lives in `status.yml`; the README and console show it.
+section has a steward who must approve changes to it. Status lives in `status.yml` and stewards in `commonhold.yml`; the README and console show both (a privately credited steward shows as "credited privately").
 
 Conventions for every section:
 - **MUST / SHOULD / MAY** as in RFC 2119.
