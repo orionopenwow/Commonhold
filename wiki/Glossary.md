@@ -10,5 +10,5 @@
 - **Visit record:** the host's signed account of what happened during a visit.
 - **Waystation:** a community node that keeps append-only fingerprints of passport versions.
 - **Re-home:** moving a character to a new home after its world closes.
-- **Door:** a launcher, list or tool that lets people into the network (Leyline, CoreCraft, Project Eternal).
+- **Door:** a launcher, list or tool that lets people into the network (Leyline is the first; anyone can build another).
 - **Steward:** the member who approves changes to one section of the spec.

@@ -23,11 +23,11 @@ guard:
 
 # Spec sections and their stewards (member handles). A spec change needs its steward among the approvers.
 spec_sections:
-  identity: is4
-  passport: wrekczar
-  customs: wrekczar
-  resilience: maweu
-  policy: maweu
+  identity: orion
+  passport: orion
+  customs: orion
+  resilience: orion
+  policy: orion
   records: orion
   directory: orion
   relays: orion

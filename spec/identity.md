@@ -1,6 +1,6 @@
 # Identity and keys
 
-Steward: credited privately · Status: draft (v0.1) · Depends on: [records](records.md)
+Steward: orion · Status: draft (v0.1) · Depends on: [records](records.md)
 
 One person is one key. There are no accounts, emails or passwords on the network: a key made on the player's own PC
 is the identity, and everything about that player is a record signed by it.

@@ -7,33 +7,6 @@
  "age_days": 7,
  "members": [
   {
-   "handle": "is4",
-   "private": true,
-   "credit": {
-    "commits": 0,
-    "areas": {},
-    "last": null
-   },
-   "stewards": [
-    "identity"
-   ],
-   "joined": "2026-11-10"
-  },
-  {
-   "handle": "maweu",
-   "private": true,
-   "credit": {
-    "commits": 0,
-    "areas": {},
-    "last": null
-   },
-   "stewards": [
-    "resilience",
-    "policy"
-   ],
-   "joined": "2026-11-10"
-  },
-  {
    "handle": "orion",
    "name": "Orion",
    "github": "orionopenwow",
@@ -57,38 +30,21 @@
     "The \"unified network, nobody owns it\" direction, the seeded big world, free and signed hosting for the record"
    ],
    "credit": {
-    "commits": 8,
+    "commits": 9,
     "areas": {
-     "root": 32,
+     "root": 36,
+     "site": 14,
+     "spec": 22,
+     "tools": 10,
      "joint": 13,
-     "members/is4": 4,
-     "members/maweu": 4,
-     "members/wrekczar": 4,
-     "site": 13,
-     "spec": 15,
-     "tools": 9,
      ".github": 10,
      "members/orion": 3,
      "wiki": 9,
      "art": 2,
      "community": 7
     },
-    "last": "2026-11-17T11:52:44-07:00"
+    "last": "2026-11-17T12:05:41-07:00"
    }
-  },
-  {
-   "handle": "wrekczar",
-   "private": true,
-   "credit": {
-    "commits": 0,
-    "areas": {},
-    "last": null
-   },
-   "stewards": [
-    "passport",
-    "customs"
-   ],
-   "joined": "2026-11-10"
   }
  ],
  "spec": {
@@ -98,7 +54,7 @@
     "id": "identity",
     "title": "Identity and keys",
     "status": "draft",
-    "steward": "credited privately"
+    "steward": "orion"
    },
    {
     "id": "records",
@@ -122,25 +78,25 @@
     "id": "passport",
     "title": "Character Passport",
     "status": "empty",
-    "steward": "credited privately"
+    "steward": "orion"
    },
    {
     "id": "customs",
     "title": "Visits, charters and customs",
     "status": "empty",
-    "steward": "credited privately"
+    "steward": "orion"
    },
    {
     "id": "resilience",
     "title": "Witness logs and re-homing",
     "status": "empty",
-    "steward": "credited privately"
+    "steward": "orion"
    },
    {
     "id": "policy",
     "title": "Hosting, safety and privacy",
     "status": "empty",
-    "steward": "credited privately"
+    "steward": "orion"
    }
   ],
   "done": 0
@@ -231,6 +187,11 @@
   {
    "date": "2026-11-17",
    "who": "orion",
+   "subject": "Spec: privately credited stewards show as \"credited privately\""
+  },
+  {
+   "date": "2026-11-17",
+   "who": "orion",
    "subject": "Credit people privately, at their request"
   },
   {
@@ -284,16 +245,6 @@
    "by": "orion",
    "what": "Launcher and host kit: one-click hosting, joining, relays, the realm directory",
    "url": "https://leylinelauncher.com"
-  },
-  {
-   "name": "Worlds of CoreCraft",
-   "what": "Character Passport and Customs Vault: visits between independent worlds",
-   "url": ""
-  },
-  {
-   "name": "Project Eternal mod-p2p",
-   "what": "Live play across player-run servers with shared identity",
-   "url": "https://github.com/Project-Eternal/mod-p2p"
   }
  ],
  "thanks": {
@@ -313,11 +264,6 @@
     "name": "CMaNGOS",
     "url": "https://github.com/cmangos",
     "for": "Open-source server cores for the earlier eras; adapter planned"
-   },
-   {
-    "name": "Project Eternal mod-p2p",
-    "url": "https://github.com/Project-Eternal/mod-p2p",
-    "for": "Live play between player-run servers; the shared identity format"
    },
    {
     "name": "Sigstore Rekor and Sigsum",

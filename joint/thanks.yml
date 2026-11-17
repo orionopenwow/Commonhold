@@ -8,7 +8,6 @@ projects:
   - {name: AzerothCore, url: "https://github.com/azerothcore/azerothcore-wotlk", for: "The open-source server core most worlds here run; the first passport adapter targets it"}
   - {name: TrinityCore, url: "https://github.com/TrinityCore/TrinityCore", for: "Open-source server core; adapter planned"}
   - {name: CMaNGOS, url: "https://github.com/cmangos", for: "Open-source server cores for the earlier eras; adapter planned"}
-  - {name: Project Eternal mod-p2p, url: "https://github.com/Project-Eternal/mod-p2p", for: "Live play between player-run servers; the shared identity format"}
   - {name: "Sigstore Rekor and Sigsum", url: "https://docs.sigstore.dev/logging/overview/", for: "Append-only transparency logs: the model for waystation witness logs"}
   - {name: Nostr, url: "https://nostrcg.github.io/devguide/protocol/overview", for: "Signed events on simple relays: the closest model to the network's records"}
   - {name: "atproto (Bluesky)", url: "https://atproto.com/blog/rpg-actor", for: "Player-held character records checked by issuers: the same idea as passports and witnesses"}

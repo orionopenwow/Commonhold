@@ -9,8 +9,9 @@ sys.path.insert(0, str(Path(__file__).parent))
 import ch  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
-CFG = ch.load_config(ROOT)
-MEMBERS = ch.load_members(ROOT)
+# The folder rules are tested on made-up members, so the tests never depend on who is in members/ today.
+CFG = {**ch.load_config(ROOT), "spec_sections": {"identity": "ana", "passport": "ben", "records": "orion"}}
+MEMBERS = {**ch.load_members(ROOT), **{h: {"handle": h, "github": h.upper()} for h in ("ana", "ben", "cal")}}
 
 
 def kinds(paths, author):
@@ -25,23 +26,23 @@ def test_own_folder_needs_nothing_and_merges_itself():
 
 
 def test_someone_elses_folder_needs_their_approval():
-    needs = ch.needs_for(["members/is4/notes.md"], "orion", MEMBERS, CFG)
-    assert not ch.check_needs(needs, {"maweu", "wrekczar"})[0][1]
-    assert ch.check_needs(needs, {"is4"})[0][1]
+    needs = ch.needs_for(["members/ana/notes.md"], "orion", MEMBERS, CFG)
+    assert not ch.check_needs(needs, {"ben", "cal"})[0][1]
+    assert ch.check_needs(needs, {"ana"})[0][1]
 
 
 def test_joint_needs_two_and_spec_needs_three_with_steward():
     assert kinds(["joint/roadmap.yml"], "orion") == [("joint", 2, ())]
     needs = ch.needs_for(["spec/identity.md"], "orion", MEMBERS, CFG)
-    assert needs[0].must_include == {"is4"} and needs[0].approvers_needed == 3
-    assert not ch.check_needs(needs, {"maweu", "wrekczar", "orion"})[0][1]   # steward missing
-    assert ch.check_needs(needs, {"maweu", "wrekczar", "is4"})[0][1]
+    assert needs[0].must_include == {"ana"} and needs[0].approvers_needed == 3
+    assert not ch.check_needs(needs, {"ben", "cal", "orion"})[0][1]   # steward missing
+    assert ch.check_needs(needs, {"ben", "cal", "ana"})[0][1]
 
 
 def test_steward_editing_own_section_still_needs_three_others():
-    needs = ch.needs_for(["spec/identity.md"], "is4", MEMBERS, CFG)
+    needs = ch.needs_for(["spec/identity.md"], "ana", MEMBERS, CFG)
     assert needs[0].must_include == set()
-    assert not ch.check_needs(needs, {"orion", "maweu"})[0][1]
+    assert not ch.check_needs(needs, {"orion", "ben"})[0][1]
 
 
 def test_core_and_generated_and_new_member():
@@ -128,13 +129,13 @@ def test_sync_keeps_unshipped_work_and_takes_everyone_elses(tmp_path):
     for d in (a, b):
         subprocess.run(["git", "clone", "-q", str(origin), str(d)], check=True)
     # B ships something to main
-    (b / "members" / "is4" / "notes.md").write_text("from b\n")
+    (b / "joint" / "notes.md").write_text("from b\n")
     g(b, "add", "-A"); g(b, *ident, "commit", "-q", "-m", "b"); g(b, "push", "-q", "origin", "main")
     # A has unshipped work in its own folder, then gets latest
     (a / "members" / "orion" / "draft.md").write_text("mine, not shipped\n")
     r = subprocess.run([sys.executable, str(a / "tools" / "ch.py"), "sync"], capture_output=True, text=True, cwd=a)
     assert r.returncode == 0, r.stdout + r.stderr
-    assert (a / "members" / "is4" / "notes.md").read_text() == "from b\n"
+    assert (a / "joint" / "notes.md").read_text() == "from b\n"
     assert (a / "members" / "orion" / "draft.md").read_text() == "mine, not shipped\n"
     assert g(a, "branch", "--show-current").strip() == "main"
 

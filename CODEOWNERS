@@ -6,6 +6,11 @@ commonhold.yml @orionopenwow
 CHARTER.md @orionopenwow
 GOVERNANCE.md @orionopenwow
 LICENSE @orionopenwow
+spec/identity.md @orionopenwow
+spec/passport.md @orionopenwow
+spec/customs.md @orionopenwow
+spec/resilience.md @orionopenwow
+spec/policy.md @orionopenwow
 spec/records.md @orionopenwow
 spec/directory.md @orionopenwow
 spec/relays.md @orionopenwow

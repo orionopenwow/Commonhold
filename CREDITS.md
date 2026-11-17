@@ -8,20 +8,17 @@ to change how you're credited, or set `credit: private` to be credited privately
 - **Brings:** Directory and realm cards, relays, one-click hosting and joining, the community workspace
 - **Project:** [Leyline](https://leylinelauncher.com)
 - **Steward of:** directory, relays
-- **Worked on:** root (32), spec (15), joint (13), site (13), .github (10), tools (9)
-- **Commits:** 8
+- **Worked on:** root (36), spec (22), site (14), joint (13), tools (10), .github (10)
+- **Commits:** 9
 - **Contributed:**
   - Started Commonhold and this workspace; the Leyline launcher, host kit, relays and signed realm listings it builds on
   - The "unified network, nobody owns it" direction, the seeded big world, free and signed hosting for the record
-
-3 more members are credited privately, at their request.
 
 ## Built on and learned from
 
 - [AzerothCore](https://github.com/azerothcore/azerothcore-wotlk): The open-source server core most worlds here run; the first passport adapter targets it
 - [TrinityCore](https://github.com/TrinityCore/TrinityCore): Open-source server core; adapter planned
 - [CMaNGOS](https://github.com/cmangos): Open-source server cores for the earlier eras; adapter planned
-- [Project Eternal mod-p2p](https://github.com/Project-Eternal/mod-p2p): Live play between player-run servers; the shared identity format
 - [Sigstore Rekor and Sigsum](https://docs.sigstore.dev/logging/overview/): Append-only transparency logs: the model for waystation witness logs
 - [Nostr](https://nostrcg.github.io/devguide/protocol/overview): Signed events on simple relays: the closest model to the network's records
 - [atproto (Bluesky)](https://atproto.com/blog/rpg-actor): Player-held character records checked by issuers: the same idea as passports and witnesses

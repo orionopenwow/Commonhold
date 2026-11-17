@@ -359,6 +359,8 @@ def build_status(root: Path = ROOT, today: dt.date | None = None) -> dict:
             cr["last"] = cr["last"] or c["date"]
             for f in c["files"]:
                 a = area_of(f)
+                if a.startswith("members/") and a[8:] not in members:
+                    continue   # a folder that's gone (its owner left or asked to be removed) isn't listed
                 cr["areas"][a] = cr["areas"].get(a, 0) + 1
         if len(recent) < 12 and not c["subject"].startswith("render:"):
             recent.append({"date": c["date"][:10], "who": h or c["name"], "subject": c["subject"][:100]})

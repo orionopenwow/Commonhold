@@ -18,7 +18,7 @@
 </p>
 
 <!-- ch:pulse:start -->
-Day **7** · **4** members · spec 0/8 sections accepted · 0/9 milestones done · updated 2026-11-17
+Day **7** · **1** members · spec 0/8 sections accepted · 0/9 milestones done · updated 2026-11-17
 <!-- ch:pulse:end -->
 
 ## The gist
@@ -28,8 +28,8 @@ Commonhold is the way between: **everyone keeps their own world, and the worlds 
 
 - **It's a protocol, not an app.** This repo holds the spec, the shared decisions and each builder's work. There is
   no Commonhold program to download, and there doesn't need to be one: launchers and server modules implement it.
-- **Nobody owns it.** The first apps speaking it are Leyline, Worlds of CoreCraft and Project Eternal, and each
-  keeps its own name. Anyone can build another.
+- **Nobody owns it.** Leyline is the first app speaking it, and any launcher, list or server module
+  can speak it too under its own name.
 - **Only signed records travel.** No game files, no money, no accounts to make: a key is your identity, and every
   listing, passport and visit is signed so anyone can check it.
 
@@ -67,15 +67,13 @@ More in [CHARTER.md](CHARTER.md), [GOVERNANCE.md](GOVERNANCE.md) and [CONTRIBUTI
 <!-- ch:members:start -->
 | Member | Brings | Project | Licence of their folder | Commits |
 |---|---|---|---|---|
-| **Orion** [@orionopenwow](https://github.com/orionopenwow) | Directory and realm cards, relays, one-click hosting and joining, the community workspace | [Leyline](https://leylinelauncher.com) | Apache-2.0 | 8 |
-
-3 more members are credited privately, at their request.
+| **Orion** [@orionopenwow](https://github.com/orionopenwow) | Directory and realm cards, relays, one-click hosting and joining, the community workspace | [Leyline](https://leylinelauncher.com) | Apache-2.0 | 9 |
 <!-- ch:members:end -->
 
 ### Thanks
 
 <!-- ch:thanks:start -->
-Built on and learned from: [AzerothCore](https://github.com/azerothcore/azerothcore-wotlk), [TrinityCore](https://github.com/TrinityCore/TrinityCore), [CMaNGOS](https://github.com/cmangos), [Project Eternal mod-p2p](https://github.com/Project-Eternal/mod-p2p), [Sigstore Rekor and Sigsum](https://docs.sigstore.dev/logging/overview/), [Nostr](https://nostrcg.github.io/devguide/protocol/overview), [atproto (Bluesky)](https://atproto.com/blog/rpg-actor), [iroh](https://pinggy.io/blog/iroh_1_0_dial_keys_not_ips/), [OpenSimulator Hypergrid](https://hypergridbusiness.com/?p=51141), [All Contributors](https://allcontributors.org/docs/en/specification).
+Built on and learned from: [AzerothCore](https://github.com/azerothcore/azerothcore-wotlk), [TrinityCore](https://github.com/TrinityCore/TrinityCore), [CMaNGOS](https://github.com/cmangos), [Sigstore Rekor and Sigsum](https://docs.sigstore.dev/logging/overview/), [Nostr](https://nostrcg.github.io/devguide/protocol/overview), [atproto (Bluesky)](https://atproto.com/blog/rpg-actor), [iroh](https://pinggy.io/blog/iroh_1_0_dial_keys_not_ips/), [OpenSimulator Hypergrid](https://hypergridbusiness.com/?p=51141), [All Contributors](https://allcontributors.org/docs/en/specification).
 
 Everyone's full contribution is in [CREDITS.md](CREDITS.md). Some people are thanked privately, at their request.
 <!-- ch:thanks:end -->
@@ -87,14 +85,14 @@ Spec **v0.1-draft**: 0 of 8 sections accepted.
 
 | Section | Steward | Status |
 |---|---|---|
-| [Identity and keys](spec/identity.md) | credited privately | 🟨 draft |
+| [Identity and keys](spec/identity.md) | orion | 🟨 draft |
 | [Signed records](spec/records.md) | orion | 🟨 draft |
 | [Realm cards and tiers](spec/directory.md) | orion | ⬜ empty |
 | [Relays and transport](spec/relays.md) | orion | ⬜ empty |
-| [Character Passport](spec/passport.md) | credited privately | ⬜ empty |
-| [Visits, charters and customs](spec/customs.md) | credited privately | ⬜ empty |
-| [Witness logs and re-homing](spec/resilience.md) | credited privately | ⬜ empty |
-| [Hosting, safety and privacy](spec/policy.md) | credited privately | ⬜ empty |
+| [Character Passport](spec/passport.md) | orion | ⬜ empty |
+| [Visits, charters and customs](spec/customs.md) | orion | ⬜ empty |
+| [Witness logs and re-homing](spec/resilience.md) | orion | ⬜ empty |
+| [Hosting, safety and privacy](spec/policy.md) | orion | ⬜ empty |
 <!-- ch:spec:end -->
 
 ## Roadmap
@@ -124,6 +122,7 @@ Spec **v0.1-draft**: 0 of 8 sections accepted.
 ## Recently shipped
 
 <!-- ch:recent:start -->
+- 2026-11-17 · **orion** · Spec: privately credited stewards show as "credited privately"
 - 2026-11-17 · **orion** · Credit people privately, at their request
 - 2026-11-12 · **orion** · Spec v0.1 drafts: signed records and identity, grounded in what Leyline runs; reference checker with
 - 2026-11-10 · **orion** · Credit everyone, Get latest and a safer ship, working together guide, how we build, AI assistant ins
@@ -137,7 +136,7 @@ Spec **v0.1-draft**: 0 of 8 sections accepted.
 ## The story so far
 
 <!-- ch:chronicle:start -->
-- **2026-11-10**: Builders from Project Eternal, Worlds of CoreCraft and Leyline agree to link their work into one open network.
+- **2026-11-10**: Work starts on linking independent worlds into one open network.
 <!-- ch:chronicle:end -->
 
 ---
