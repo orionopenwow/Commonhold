@@ -34,8 +34,8 @@ accepts, for example a friend's. Leyline uses this for lasting logins on a frien
 ## 4. Characters bound to the key (to write, with the passport steward)
 
 - A character's id is derived from the player key, so a passport can only ever belong to one identity.
-- **Proposal:** follow mod-p2p's derivation, `SHA-256("p2p character" || account public key || nonce)[0:16]`, so
-  the same character has the same id in live play (mod-p2p) and on passports (Commonhold). **The identity steward to confirm.**
+- **Proposal:** `char_id = SHA-256("commonhold-character-v1" || player public key || nonce)[0:16]`, so a character
+  keeps the same id in live play and on passports. **The identity steward to confirm.**
 
 ## 5. Not trackable across worlds (to write)
 
@@ -56,14 +56,10 @@ One public key shown to every world would let anyone follow a player from world 
   co-signing (two friends' keys) comes later.
 - **More devices:** a second device joins by typing a one-time code shown on the first.
 
-## 7. Compatibility with mod-p2p
+## 7. Live play
 
-| | mod-p2p | Leyline today | Spec proposal |
-|---|---|---|---|
-| Signing key | Ed25519 account key | Ed25519 peer key | Ed25519: the same key can serve both |
-| Encryption | X25519 derived via HKDF, ChaCha20-Poly1305 | X25519 via the birational map, HKDF, ChaCha20-Poly1305 | Write down one derivation, with vectors for both |
-| Character id | `SHA-256("p2p character" ‖ key ‖ nonce)[0:16]` | (none yet) | Adopt mod-p2p's |
-| Certificates | Signed by the account key | Signed records with contexts | Records with contexts; a mod-p2p certificate maps onto one |
+Any live-play module that signs with the same Ed25519 player key and derives character ids the same way can carry
+the same identity. One derivation is written down here, with vectors, so every implementation gets the same bytes.
 
 ## To write
 

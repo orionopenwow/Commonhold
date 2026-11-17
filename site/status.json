@@ -30,20 +30,20 @@
     "The \"unified network, nobody owns it\" direction, the seeded big world, free and signed hosting for the record"
    ],
    "credit": {
-    "commits": 9,
+    "commits": 10,
     "areas": {
-     "root": 36,
-     "site": 14,
-     "spec": 22,
-     "tools": 10,
-     "joint": 13,
+     "root": 40,
+     "joint": 16,
+     "site": 15,
+     "spec": 27,
+     "tools": 12,
+     "wiki": 10,
      ".github": 10,
      "members/orion": 3,
-     "wiki": 9,
      "art": 2,
      "community": 7
     },
-    "last": "2026-11-17T12:05:41-07:00"
+    "last": "2026-11-17T12:07:23-07:00"
    }
   }
  ],
@@ -144,7 +144,7 @@
   {
    "id": "live",
    "when": "Weeks 8-12",
-   "title": "Live-play bridge with mod-p2p on stock AzerothCore",
+   "title": "Live-play bridge on stock AzerothCore",
    "status": "todo"
   },
   {
@@ -163,7 +163,7 @@
  "decisions": [
   {
    "id": "0001-shared-identity",
-   "title": "One identity shared with mod-p2p",
+   "title": "One identity for live play and visits",
    "status": "proposed",
    "proposed_by": "orion",
    "date": "2026-11-10"
@@ -184,6 +184,11 @@
   }
  ],
  "recent": [
+  {
+   "date": "2026-11-17",
+   "who": "orion",
+   "subject": "Remove the other members' folders and credit, at their request"
+  },
   {
    "date": "2026-11-17",
    "who": "orion",

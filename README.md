@@ -67,7 +67,7 @@ More in [CHARTER.md](CHARTER.md), [GOVERNANCE.md](GOVERNANCE.md) and [CONTRIBUTI
 <!-- ch:members:start -->
 | Member | Brings | Project | Licence of their folder | Commits |
 |---|---|---|---|---|
-| **Orion** [@orionopenwow](https://github.com/orionopenwow) | Directory and realm cards, relays, one-click hosting and joining, the community workspace | [Leyline](https://leylinelauncher.com) | Apache-2.0 | 9 |
+| **Orion** [@orionopenwow](https://github.com/orionopenwow) | Directory and realm cards, relays, one-click hosting and joining, the community workspace | [Leyline](https://leylinelauncher.com) | Apache-2.0 | 10 |
 <!-- ch:members:end -->
 
 ### Thanks
@@ -106,7 +106,7 @@ Spec **v0.1-draft**: 0 of 8 sections accepted.
 | Weeks 3-7 | Stock AzerothCore passport adapter | ⬜ to do |
 | Weeks 6-8 | Pilot: one character visits another world and comes home; chaos tests | ⬜ to do |
 | Weeks 6-10 | Leyline door: tiers, tags, passport store, backups, Visit and Re-home | ⬜ to do |
-| Weeks 8-12 | Live-play bridge with mod-p2p on stock AzerothCore | ⬜ to do |
+| Weeks 8-12 | Live-play bridge on stock AzerothCore | ⬜ to do |
 | Weeks 8-12 | Waystations, witness logs, Close this world, re-homing | ⬜ to do |
 | Weeks 10-12 | First league with 3-5 hosts; spec v1.0 public | ⬜ to do |
 <!-- ch:roadmap:end -->
@@ -114,7 +114,7 @@ Spec **v0.1-draft**: 0 of 8 sections accepted.
 ## Open decisions
 
 <!-- ch:decisions:start -->
-- [One identity shared with mod-p2p](joint/decisions/0001-shared-identity.md), proposed by orion
+- [One identity for live play and visits](joint/decisions/0001-shared-identity.md), proposed by orion
 - [Clean provenance for everything shared](joint/decisions/0002-clean-provenance.md), proposed by orion
 - [Your folder is yours; shared work is reviewed](joint/decisions/0003-folders-and-shipping.md), proposed by orion
 <!-- ch:decisions:end -->
@@ -122,6 +122,7 @@ Spec **v0.1-draft**: 0 of 8 sections accepted.
 ## Recently shipped
 
 <!-- ch:recent:start -->
+- 2026-11-17 · **orion** · Remove the other members' folders and credit, at their request
 - 2026-11-17 · **orion** · Spec: privately credited stewards show as "credited privately"
 - 2026-11-17 · **orion** · Credit people privately, at their request
 - 2026-11-12 · **orion** · Spec v0.1 drafts: signed records and identity, grounded in what Leyline runs; reference checker with
